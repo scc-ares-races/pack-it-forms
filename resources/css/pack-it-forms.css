@@ -341,6 +341,71 @@ input[type="button"]:focus {
 }
 
 
+/* Veoci form layout model. */
+
+/* <table class="veoci"> is one section of a Veoci form. */
+.veoci {
+    page-break-inside: avoid;
+    border: 1px solid #aaa;
+    border-bottom: none;
+}
+.veoci + .veoci {
+    /* Avoid double border between sections. */
+    border-top: none;
+}
+/* <caption> contains the section heading. */
+.veoci caption {
+    background-color: #ccc;
+    font-weight: bold;
+    padding: 0.5ex 0.5em;
+    text-align: left;
+}
+.veoci td {
+    /* Cells within a section have only a bottom border. */
+    border: none;
+    border-bottom: 1px solid #aaa;
+}
+/* <td class="nest"> is for a cell that contains a nested table. */
+.veoci .nest {
+    padding: 0;
+}
+.nest tr:last-child > td {
+    border-bottom: none;
+}
+/* <td class="label"> is for a cell that contains a label.
+ * The column width is the minimum needed for all labels. */
+.veoci .label {
+    white-space: nowrap;
+    width: 1px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+.veoci .label-top {
+    white-space: nowrap;
+    width: 1px;
+    font-weight: bold;
+}
+/* <td class="input" is for a cell that contains an input field. */
+.veoci .input + .label {
+    border-left: 1px solid #aaa;
+}
+.veoci input[type=text],
+.veoci textarea {
+    /* Reduce width by cell padding. */
+    width: calc(100% - 0.5em);
+}
+/* <table class="boxgroup"> contains a set of radio buttons and/or
+ * checkboxes. */
+.boxgroup {
+    width: auto;
+    margin: 0;
+}
+.boxgroup td {
+    border: none;
+    padding: 0 1em 0 0;
+}
+
+
 /* Border control */
 
 .noborder td {
@@ -357,6 +422,9 @@ td.border {
 }
 td.border-left {
     border-left: 1px solid #aaaaaa;
+}
+td.border-right {
+    border-right: 1px solid #aaa;
 }
 
 .fullsize-textfields td:not(.noft) input, .fullsize-textfields td:not(.noft) textarea {
@@ -424,8 +492,8 @@ form input:invalid, form textarea:invalid, form select:invalid, .invalid {
     box-shadow: 0 0 6px 2px #c80000;
     transition: box-shadow 0.5s;
 }
-form div.required-group input[type="checkbox"]:invalid,
-form div.required-group input[type="radio"]:invalid {
+form .required-group input[type="checkbox"]:invalid,
+form .required-group input[type="radio"]:invalid {
     box-shadow: none;
 }
 

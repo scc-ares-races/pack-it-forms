@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=Content-type content=text/html;charset=UTF-8>
+    <link rel=stylesheet type=text/css href=resources/css/loading.css/>
+    <link rel=stylesheet type=text/css href=resources/css/pack-it-forms.css/>
+    <style>
+      .annotation {
+        font-size: 80%;
+      }
+    </style>
+    <script type=text/javascript src=resources/js/pack-it-forms.js></script>
+    <script type=text/javascript src=resources/integration/integration.js></script>
+    <meta name=pack-it-forms-pdf-URL content=pdf/Damage_Assessment_v20250628.pdf>
+    <meta name=pack-it-forms-subject-suffix content=_DmgAsmt_{{field:20.jurisdiction}}>
+    <title>Damage Assessment</title>
+  </head>
+
+  <body>
+    <div class=version>0.2</div>
+    <%#include%>resources/html/loading.html<%/include%>
+    <form id=the-form name=the-form>
+      <%#run%>include("resources/html/scco-header.html", {
+          "title": "Damage Assessment",
+          "version": "Veoci: 20250529<br/>PIF: {{version}}",
+          "to-ics-position": "Situation Analysis Unit; Planning Section",
+          "to-location": "County EOC"
+        })
+      <%/run%>
+      <table class=veoci>
+        <caption>Overview
+        <tr>
+          <td class=label>Jurisdiction:
+          <td class=input>
+            <%#run%>include('resources/html/jurisdiction.html', {
+                name: "20.jurisdiction",
+                tabindex: "20",
+              })
+            <%/run%>
+        <tr>
+          <td class=label>Incident Name:
+          <td class=input><input type=text name=21.incident-name tabindex=20 required>
+        <tr>
+          <td class=label>Address:
+          <td class=input><input type=text name=22.address tabindex=20>
+        <tr>
+          <td class=label>Unit/Suite:
+          <td class=input><input type=text name=23.unit-suite tabindex=20>
+        <tr>
+          <td class=label-top>Type of Structure:
+          <td class=input>
+            <table class="boxgroup required-group">
+              <tr>
+                <td><input name=24.type-structure type=radio value="Single Family" tabindex=20 required>Single Family
+                <td><input name=24.type-structure type=radio value=Business tabindex=21 required>Business
+              <tr>
+                <td><input name=24.type-structure type=radio value=Multi-Family tabindex=20 required>Multi-Family
+                <td><input name=24.type-structure type=radio value="Non-Profit Orgs" tabindex=21 required>Non-Profit Orgs
+              <tr>
+                <td><input name=24.type-structure type=radio value="Mobile Home" tabindex=20 required>Mobile Home
+                <td><input name=24.type-structure type=radio value=Outbuilding tabindex=21 required>Outbuilding
+            </table>
+        <tr>
+          <td class=label>Own/Rent:
+          <td class=input>
+            <table class=boxgroup><tr>
+              <td><input name=25.own-rent type=radio value=Own tabindex=21>Own
+              <td><input name=25.own-rent type=radio value=Rent tabindex=21>Rent
+            </table>
+        <tr>
+          <td class=label-top>Types of Damage:<br><span class=annotation>(multi-select)</span>
+          <td class=input>
+            <table class="boxgroup required-group">
+              <tr>
+                <td><input name=26a.type-damage-flooding type=checkbox tabindex=21 required>Flooding
+                <td><input name=26c.type-damage-structural type=checkbox tabindex=22 required>Structural
+              <tr>
+                <td><input name=26b.type-damage-exterior type=checkbox tabindex=21 required>Roof / Windows / Other Exterior
+                <td><input name=26d.type-damage-other type=checkbox tabindex=22 required>Other
+            </table>
+        <tr>
+          <td class=label-top>Basement Type:</td>
+          <td class=input>
+            <table class=boxgroup>
+              <tr>
+                <td><input name=27.basement type=radio value=Basement tabindex=22>Basement
+                <td><input name=27.basement type=radio value="Basement and Crawlspace" tabindex=23>Basement and Crawlspace
+              <tr>
+                <td><input name=27.basement type=radio value=Crawlspace tabindex=22>Crawlspace
+                <td><input name=27.basement type=radio value=Slab tabindex=23>Slab
+              <tr>
+                <td><input name=27.basement type=radio value=N/A tabindex=22>N/A
+            </table>
+        <tr>
+          <td class=label-top>Damage Classification:
+          <td class=input>
+            <table class="boxgroup required-group">
+              <tr>
+                <td><input name=28.damage-class type=radio value=Destroyed tabindex=23 required>Destroyed
+                <td><input name=28.damage-class type=radio value=Minor tabindex=24 required>Minor
+                <td><input name=28.damage-class type=radio value="No Visible Damage" tabindex=25 required>No Visible Damage
+              <tr>
+                <td><input name=28.damage-class type=radio value=Major tabindex=23 required>Major
+                <td colspan=2><input name=28.damage-class type=radio value=Affected tabindex=24 required>Affected (Superficial or Cosmetic Damage Only)
+            </table>
+        <tr>
+          <td class=label>Tag:
+          <td class=input>
+            <table class="boxgroup required-group"><tr>
+              <td><input name=29.tag type=radio value=Green tabindex=25 required>Green Tagged
+              <td><input name=29.tag type=radio value=Yellow tabindex=25 required>Yellow Tagged
+              <td><input name=29.tag type=radio value="Red Damage" tabindex=25 required>Red Tagged
+            </table>
+        <tr>
+          <td class=label>Insurance:
+          <td class=input>
+            <table class=boxgroup><tr>
+              <td><input name=30.insurance type=radio value=Yes tabindex=25>Yes
+              <td><input name=30.insurance type=radio value=No tabindex=25>No
+            </table>
+        <tr>
+          <td class=label>Estimated Damage ($):
+          <td class=input><input type=text name=31.estimate class=cardinal-number tabindex=25 required>
+        <tr>
+          <td class=label>Comments:
+          <td class=input><textarea name=32.comments rows=2 tabindex=25></textarea>
+        <tr>
+          <td class=label>Contact Name:
+          <td class="input nest">
+            <table><tr>
+              <td class=input><input type=text name=33.contact-name tabindex=25 required>
+              <td class=label>Contact Phone:
+              <td class=input><input type=text name=34.contact-phone class=phone-number tabindex=25 required>
+            </table>
+      </table>
+      <%#include%>resources/html/scco-footer.html<%/include%>
+    </form>
+    <%#include%>resources/html/submit-buttons.html<%/include%>
+  </body>
+</html>

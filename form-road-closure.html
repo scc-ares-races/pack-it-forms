@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=Content-Type content=text/html;charset=UTF-8>
+    <link rel=stylesheet type=text/css href=resources/css/loading.css/>
+    <link rel=stylesheet type=text/css href=resources/css/pack-it-forms.css/>
+    <style>
+      .annotation {
+        font-size: 80%;
+      }
+    </style>
+    <script type=text/javascript src=resources/js/pack-it-forms.js></script>
+    <script type=text/javascript src=resources/integration/integration.js></script>
+    <meta name=pack-it-forms-pdf-URL content=pdf/Road_Closure_v20250701.pdf>
+    <meta name=pack-it-forms-subject-suffix content=_RdClosed_{{field:21.road}}>
+    <title>Road Closure</title>
+  </head>
+
+  <body>
+    <div class=version>0.1</div>
+    <%#include%>resources/html/loading.html<%/include%>
+    <form id=the-form name=the-form>
+      <%#run%>include('resources/html/scco-header.html', {
+          "title": "Road Closure",
+          "version": "Veoci: 20250523<br/>PIF: {{version}}",
+          "to-ics-position": "Situation Analysis Unit; Planning Section",
+          "to-location": "County EOC",
+        })
+      <%/run%>
+      <table class=veoci>
+        <caption>Initial Information
+        <tr>
+          <td class=label>Jurisdiction:
+          <td class=input>
+            <%#run%>include('resources/html/jurisdiction.html', {
+                name: "20.jurisdiction",
+                tabindex: "20",
+              })
+            <%/run%>
+        <tr>
+          <td class=label>Road/Intersection:
+          <td class=input><input type=text name=21.road tabindex=20 required>
+        <tr>
+          <td class=label>Location:
+          <td class=input><textarea name=22.location tabindex=20 required></textarea>
+        <tr>
+          <td class=label>Details:
+          <td class=input><textarea name=23.details tabindex=20 required></textarea>
+        <tr>
+          <td class=label>Status:
+          <td class=input>
+            <table class="boxgroup required-group"><tr>
+              <td><input type=radio name=24.status value="Planned Closure" tabindex=20 required>Planned Closure
+              <td><input type=radio name=24.status value=Closed tabindex=20 required>Closed
+              <td><input type=radio name=24.status value=Reopened tabindex=20 required>Reopened
+            </table>
+      </table>
+      <table class=veoci>
+        <caption>Closure Time
+        <tr>
+          <td class=label>Closure Start Date:
+          <td class=input><input type=text name=30d.start-date class=date tabindex=30>
+          <td class=label>Closure Start Time:
+          <td class=input><input type=text name=30t.start-time class=time tabindex=30>
+        <tr>
+          <td class=label>Closure End Date:
+          <td class=input><input type=text name=31d.end-date class=date tabindex=30>
+          <td class=label>Closure End Time:
+          <td class=input><input type=text name=31t.end-time class=time tabindex=30>
+      </table>
+      <%#include%>resources/html/scco-footer.html<%/include%>
+    </form>
+    <%#include%>resources/html/submit-buttons.html<%/include%>
+  </body>
+</html>

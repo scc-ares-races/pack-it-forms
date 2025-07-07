@@ -1055,6 +1055,10 @@ var ComboBox = function ComboBox(box) {
         that.selectItem(this);
         that.chooseSelectedItem();
     };
+    if (box.dataset.options) {
+        const options = box.dataset.options.split(/;\s*/).filter(f => f);
+        this.setOptions(options);
+    }
 };
 
 ComboBox.getByName = function getByName(name) {
@@ -1595,12 +1599,12 @@ function setup_input_from_classes(input) {
                  placeholder: "mm/dd/yyyy"},
         "time": {pattern: "([01][0-9]|2[0-3]):?[0-5][0-9]|2400|24:00",
                  placeholder: "hh:mm"},
-        "phone-number": {pattern: "[a-zA-Z ]*([+][0-9]+ )?[0-9][0-9 -]*([xX][0-9]+)?",
+        "phone-number": {pattern: "[a-zA-Z ]*([+][0-9]+ )?[0-9][0-9 \\-]*([xX][0-9]+)?",
                          placeholder: "000-000-0000 x00"},
         "cardinal-number": {pattern: "[0-9]*"},
-        "real-number":      {pattern: "[-+]?[0-9]*\.[0-9]+|[-+]?[0-9]+"},
+        "real-number":      {pattern: "[\\-+]?[0-9]*\\.[0-9]+|[\\-+]?[0-9]+"},
         "frequency": {pattern: "[0-9]+(\.[0-9]+)?"},
-        "frequency-offset": {pattern: "[-+]?[0-9]*\.[0-9]+|[-+]?[0-9]+|[-+]"}
+        "frequency-offset": {pattern: "[\\-+]?[0-9]*\\.[0-9]+|[\\-+]?[0-9]+|[\\-+]"}
     };
     var pattern = input.pattern;
     for (var s in standardAttributes) {
@@ -1656,53 +1660,70 @@ function check_not_blank(input) {
 
 var required_groups = [];
 
+function onRequiredInputChange(evt) {
+    const group = evt.target.closest('.required-group');
+    const checked = !!group.querySelector(':checked');
+    if (group.querySelector(':checked')) {
+        group.querySelectorAll('input[type=checkbox]:required').forEach(r => { r.required = false; });
+        group.classList.remove('invalid');
+    } else {
+        let haveRequired = false, seenRFC = false;
+        group.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach (r => {
+            if (r.classList.contains('required-for-complete')) seenRFC = true;
+            r.required = !seenRFC || currentReportIsComplete;
+            if (r.required) haveRequired = true;
+        });
+        group.classList.toggle('invalid', haveRequired);
+    }
+    check_the_form_validity();
+}
+
+
 function setupRequiredGroups(input) {
-    array_for_each(required_groups, function(group) {
-        var checks = group.frame.querySelectorAll('input[type="checkbox"]');
-        var radios = group.frame.querySelectorAll('input[type="radio"]');
-        var someInput = function(f) {
-            return array_some(checks, f) || array_some(radios, f);
-        };
-        var forEachInput = function(f) {
-            array_for_each(checks, f);
-            array_for_each(radios, f);
-        };
-        var isChecked = function(input) {return input.checked;};
-        var isRequired = function(input) {return input.required;};
-        var setValid = function(valid) {
-            if (valid) {
-                group.frame.classList.remove("invalid");
-            } else {
-                group.frame.classList.add("invalid");
+    required_groups.forEach(group => { onRequiredInputChange({target: group}) });
+}
+
+function setupConditionalElements() {
+    const the_form = document.getElementById('the-form');
+    document.querySelectorAll('[data-conditional]').forEach(elm => {
+        if (!elm.dataset.conditional) return;
+        const triggerSpec = elm.dataset.conditional.split('=', 2);
+        const triggerName = triggerSpec[0];
+        const triggerValue = triggerSpec[1];
+        if (!the_form[triggerName]) throw `data-conditional="${triggerSpec}": no such element`;
+        function onTriggerChange() {
+            const value = the_form[triggerName].value;
+            if ((triggerValue && value === triggerValue) || (!triggerValue && value))
+                elm.style.display = null;
+            else {
+                elm.style.display = 'none';
+                const inputs = {};
+                elm.querySelectorAll('input[type=checkbox],input[type=radio]').forEach(i => {
+                    if (i.checked) {
+                        i.checked = false;
+                        i.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                });
+                elm.querySelectorAll('input[type=text],select,textarea').forEach(i => {
+                    if (i.value) {
+                        i.value = '';
+                        i.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                });
             }
-        };
-        if (someInput(isRequired)) {
-            setValid(someInput(isChecked));
-            forEachInput(function(input) {
-                input.addEventListener("change", group.onChange);
-            });
-        } else {
-            setValid(true);
-            forEachInput(function(input) {
-                input.removeEventListener("change", group.onChange);
-            });
         }
+        document.getElementsByName(triggerName).forEach(tr => {
+            tr.addEventListener('change', onTriggerChange);
+            tr.addEventListener('input', onTriggerChange);
+        });
+        onTriggerChange();
     });
 }
 
 function setup_inputs(next) {
     if (!envelope.readOnly) {
-        array_for_each(document.querySelectorAll("div.required-group"), function(frame) {
-            required_groups.push({
-                frame: frame,
-                onChange: function requiredGroupListener() {
-                    if (this.checked) {
-                        frame.classList.remove("invalid");
-                    } else {
-                        frame.classList.add("invalid");
-                    }
-                }});
-        });
+        required_groups = Array.from(document.querySelectorAll('.required-group'));
+        required_groups.forEach(g => { g.addEventListener('change', onRequiredInputChange) });
         var the_form = document.querySelector("#the-form");
         array_for_each(the_form.elements, function (el) {
             setup_input_from_classes(el);
@@ -1741,6 +1762,7 @@ function setup_inputs(next) {
             }
         });
         setupRequiredGroups();
+        setupConditionalElements();
         the_form.addEventListener("input", formChanged);
         write_message_to_form_data();
     }

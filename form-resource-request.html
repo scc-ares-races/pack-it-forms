@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=Content-Type content=text/html;charset=UTF-8>
+    <link rel=stylesheet type=text/css href=resources/css/loading.css/>
+    <link rel=stylesheet type=text/css href=resources/css/pack-it-forms.css/>
+    <style>
+      .annotation {
+        font-size: 80%;
+      }
+    </style>
+    <script type=text/javascript src=resources/js/pack-it-forms.js></script>
+    <script type=text/javascript src=resources/integration/integration.js></script>
+    <meta name=pack-it-forms-pdf-URL content=pdf/Resource_Request_v20250701.pdf>
+    <meta name=pack-it-forms-subject-suffix content=_ResReq_{{field:20.jurisdiction}}>
+    <title>Resource Request</title>
+  </head>
+
+  <body>
+    <div class=version>0.1</div>
+    <%#include%>resources/html/loading.html<%/include%>
+    <form id=the-form name=the-form>
+      <%#run%>include('resources/html/scco-header.html', {
+          "title": "Resource Request",
+          "version": "Veoci: 20250609<br/>PIF: {{version}}",
+          "to-ics-position": "Situation Analysis Unit; Planning Section",
+          "to-location": "County EOC",
+        })
+      <%/run%>
+      <table class=veoci>
+        <caption>Resource Order
+        <tr>
+          <td class=label>Jurisdiction:
+          <td class=input>
+            <%#run%>include('resources/html/jurisdiction.html', {
+                name: "20.jurisdiction",
+                tabindex: "20",
+              })
+            <%/run%>
+        <tr>
+          <td class="label border-right">Item 1
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Item Name:
+                <td class="input nest">
+                  <table><tr>
+                    <td class=input><input type=text name=21n.name tabindex=20 required>
+                    <td class=label>Quantity Requested:
+                    <td class=input><input type=text name=21q.quantity class=cardinal-number tabindex=20 required>
+                  </table>
+              <tr><td class=label colspan=2>
+                Description (characteristics, brand, specs, size, fuel type, experience, etc)
+                <br>
+                <textarea name=21d.description tabindex=20></textarea>
+              <tr><td colspan=2 class=nest>
+                <table><tr>
+                  <td class=label>Includes Items for Demobilization?
+                  <td class=input>
+                    <table class="boxgroup required-group"><tr>
+                      <td><input type=radio name=21i.demob value=Yes tabindex=20 required>Yes
+                      <td><input type=radio name=21i.demob value=No tabindex=20 required>No
+                    </table>
+                </table>
+            </table>
+        <tr data-conditional=21n.name>
+          <td class="label border-right">Item 2
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Item Name:
+                <td class="input nest">
+                  <table><tr>
+                    <td class=input><input type=text name=22n.name tabindex=20>
+                    <td class=label data-conditional=22n.name>Quantity Requested:
+                    <td class=input data-conditional=22n.name><input type=text name=22q.quantity class=cardinal-number tabindex=20 required>
+                  </table>
+              <tr data-conditional=22n.name><td class=label colspan=2>
+                Description (characteristics, brand, specs, size, fuel type, experience, etc)
+                <br>
+                <textarea name=22d.description tabindex=20></textarea>
+              <tr data-conditional=22n.name><td colspan=2 class=nest>
+                <table><tr>
+                  <td class=label>Includes Items for Demobilization?
+                  <td class=input>
+                    <table class="boxgroup required-group"><tr>
+                      <td><input type=radio name=21i.demob value=Yes tabindex=20 required>Yes
+                      <td><input type=radio name=21i.demob value=No tabindex=20 required>No
+                    </table>
+                </table>
+            </table>
+        <tr data-conditional=22n.name>
+          <td class="label border-right">Item 3
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Item Name:
+                <td class="input nest">
+                  <table><tr>
+                    <td class=input><input type=text name=23n.name tabindex=20>
+                    <td class=label data-conditional=23n.name>Quantity Requested:
+                    <td class=input data-conditional=23n.name><input type=text name=23q.quantity class=cardinal-number tabindex=20 required>
+                  </table>
+              <tr data-conditional=23n.name><td class=label colspan=2>
+                Description (characteristics, brand, specs, size, fuel type, experience, etc)
+                <br>
+                <textarea name=23d.description tabindex=20></textarea>
+              <tr data-conditional=23n.name><td colspan=2 class=nest>
+                <table><tr>
+                  <td class=label>Includes Items for Demobilization?
+                  <td class=input>
+                    <table class="boxgroup required-group"><tr>
+                      <td><input type=radio name=21i.demob value=Yes tabindex=20 required>Yes
+                      <td><input type=radio name=21i.demob value=No tabindex=20 required>No
+                    </table>
+                </table>
+            </table>
+        <tr data-conditional=23n.name>
+          <td class="label border-right">Item 4
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Item Name:
+                <td class="input nest">
+                  <table><tr>
+                    <td class=input><input type=text name=24n.name tabindex=20>
+                    <td class=label data-conditional=24n.name>Quantity Requested:
+                    <td class=input data-conditional=24n.name><input type=text name=24q.quantity class=cardinal-number tabindex=20 required>
+                  </table>
+              <tr data-conditional=24n.name><td class=label colspan=2>
+                Description (characteristics, brand, specs, size, fuel type, experience, etc)
+                <br>
+                <textarea name=24d.description tabindex=20></textarea>
+              <tr data-conditional=24n.name><td colspan=2 class=nest>
+                <table><tr>
+                  <td class=label>Includes Items for Demobilization?
+                  <td class=input>
+                    <table class="boxgroup required-group"><tr>
+                      <td><input type=radio name=21i.demob value=Yes tabindex=20 required>Yes
+                      <td><input type=radio name=21i.demob value=No tabindex=20 required>No
+                    </table>
+                </table>
+            </table>
+      </table>
+      <table class=veoci>
+        <caption>Priority
+        <tr>
+          <td class=label-top>Priority:<br><span class=annotation>(Pick One)</span>
+          <td class=input>
+            <table class="boxgroup required-group">
+              <tr>
+                <td><input name=30.priority type=radio value=Urgent tabindex=30>Urgent (as soon as possible)
+                <td><input name=30.priority type=radio value=Medium tabindex=30>Medium (1–2 days)
+              <tr>
+                <td><input name=30.priority type=radio value=High tabindex=30>High (within 24 hours)
+                <td><input name=30.priority type=radio value=Low tabindex=30>Low (2–3 days)
+            </table>
+      </table>
+      <table class=veoci>
+        <caption>Requested By Details
+        <tr>
+          <td class=label>Requested By Name:
+          <td class="input nest">
+            <table><tr>
+              <td class=input><input type=text name=40.requester-name tabindex=40 required>
+              <td class=label>Requested By Phone:
+              <td class=input><input type=text name=41.requester-phone class=phone-number tabindex=40 required>
+            </table>
+        <tr>
+          <td class=label>Requested By Email:
+          <td class=input><input type=text name=42.requester-email tabindex=40 required>
+        <tr>
+          <td class=label>Requested By Position:
+          <td class=input><input type=text name=43.requester-position tabindex=40 required>
+      </table>
+      <table class=veoci>
+        <caption>Incident Details
+        <tr>
+          <td class=label>Is this request related to a current JURISDICTION activation?
+          <td class=input>
+            <table class="boxgroup required-group"><tr>
+              <td><input name=50.juris-active type=radio value=Yes tabindex=50 required>Yes
+              <td><input name=50.juris-active type=radio value=No tabindex=50 required>No
+            </table>
+        <tr data-conditional="50.juris-active=Yes">
+          <td class=label>Name of Jurisdiction's incident:
+          <td class=input><input type=text name=51.juris-incname tabindex=50 required>
+        <tr>
+          <td class=label>Is this request related to a current COUNTY activation?
+          <td class=input>
+            <table class="boxgroup required-group"><tr>
+              <td><input name=52.county-active type=radio value=Yes tabindex=50 required>Yes
+              <td><input name=52.county-active type=radio value=No tabindex=50 required>No
+            </table>
+        <tr data-conditional="52.county-active=Yes">
+          <td class=label>Name of County's incident:
+          <td class=input><input type=text name=51.county-incname tabindex=50 required>
+      </table>
+      <table class=veoci>
+        <caption>Comments
+        <tr><td class=input><textarea name=60.comments tabindex=60></textarea>
+      </table>
+      <%#include%>resources/html/scco-footer.html<%/include%>
+    </form>
+    <%#include%>resources/html/submit-buttons.html<%/include%>
+  </body>
+</html>

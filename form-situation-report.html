@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=Content-Type content=text/html;charset=UTF-8>
+    <link rel=stylesheet type=text/css href=resources/css/loading.css/>
+    <link rel=stylesheet type=text/css href=resources/css/pack-it-forms.css/>
+    <script type=text/javascript src=resources/js/pack-it-forms.js></script>
+    <script type=text/javascript src=resources/integration/integration.js></script>
+    <meta name=pack-it-forms-pdf-URL content=pdf/Situation_Report_v20250703.pdf>
+    <meta name=pack-it-forms-subject-suffix content=_SitRep_{{field:20.jurisdiction}}>
+    <title>Situation Report</title>
+  </head>
+
+  <body>
+    <div class=version>0.1</div>
+    <%#include%>resources/html/loading.html<%/include%>
+    <form id=the-form name=the-form>
+      <%#run%>include('resources/html/scco-header.html', {
+          "title": "Situation Report",
+          "version": "Veoci: 20250702<br/>PIF: {{version}}",
+          "to-ics-position": "Situation Analysis Unit; Planning Section",
+          "to-location": "County EOC",
+        })
+      <%/run%>
+      <table class=veoci>
+        <caption>Overview
+        <tr>
+          <td class=label>Jurisdiction:
+          <td class=input>
+            <%#run%>include('resources/html/jurisdiction.html', {
+                name: "20.jurisdiction",
+                tabindex: "20",
+              })
+            <%/run%>
+        <tr>
+          <td class=label>Incident Name:
+          <td class="input nest">
+            <table><tr>
+              <td class=input><input type=text name=21.incident-name tabindex=20 required>
+              <td class=label>Prepared Date:
+              <td class=input><input type=text name=22d.prepared-date class=date tabindex=20 required>
+              <td class=label>Prepared Time:
+              <td class=input><input type=text name=22t.prepared-time class=time tabindex=20 required>
+            </table>
+        <tr>
+          <td class=label>Emergency Declaration:
+          <td class=input>
+            <table class=boxgroup><tr>
+              <td><input type=radio name=23.declaration value=Unknown tabindex=20>Unknown
+              <td><input type=radio name=23.declaration value=Yes tabindex=20>Yes
+              <td><input type=radio name=23.declaration value=No tabindex=20>No
+            </table>
+        <tr>
+          <td class=label>EOC Activation:
+          <td class=input>
+            <table class=boxgroup>
+              <tr>
+                <td><input type=radio name=24.eoc value=Normal tabindex=20>Normal
+                <td><input type=radio name=24.eoc value="Duty Officer" tabindex=20>Duty Officer
+                <td><input type=radio name=24.eoc value=Monitar tabindex=20>Monitor
+              <tr>
+                <td><input type=radio name=24.eoc value=Partial tabindex=20>Partial
+                <td><input type=radio name=24.eoc value=Full tabindex=20>Full
+            </table>
+        <tr>
+          <td class=label>Incident Description:
+          <td class=input><textarea name=25.description tabindex=20 required></textarea>
+      </table>
+      <table class=veoci>
+        <caption>Reported By
+        <tr>
+          <td class=label>Prepared By:
+          <td class="input nest">
+            <table><tr>
+              <td class=input><input type=text name=30.preparer-name tabindex=30>
+              <td class=label>Contact Number:
+              <td class=input><input type=text name=31.preparer-phone class=phone-number tabindex=30>
+            </table>
+        <tr>
+          <td class=label>Email:
+          <td class=input><input type=text name=32.preparer-email tabindex=30>
+      </table>
+      <table class=veoci>
+        <caption>Additional Incident Information
+        <tr><td><textarea name=40.addl-info tabindex=40></textarea>
+      </table>
+      <table class=veoci>
+        <caption>Government Office Status
+        <tr>
+          <td class=label>Office Status:
+          <td class=input>
+            <table class=boxgroup><tr>
+              <td><input type=radio name=50.office-status value=Unknown tabindex=50>Unknown
+              <td><input type=radio name=50.office-status value=Open tabindex=50>Open
+              <td><input type=radio name=50.office-status value=Closed tabindex=50>Closed
+            </table>
+        <tr>
+          <td class=label>Expected to Open Date:
+          <td class="input nest">
+            <table><tr>
+              <td class=input><input type=text name=51.office-open class=date tabindex=50>
+              <td class=label>Expected to Close Date:
+              <td class=input><input type=text name=52.office-close class=date tabindex=50>
+            </table>
+      </table>
+      <table class=veoci>
+        <caption>Approved By
+        <tr>
+          <td class=label>Approved By:
+          <td class="input nest">
+            <table><tr>
+              <td class=input><input type=text name=60.approver-name tabindex=60>
+              <td class=label>Contact Phone:
+              <td class=input><input type=text name=61.approver-phone tabindex=60>
+            </table>
+        <tr>
+          <td class=label>ICS Position:
+          <td class="input nest">
+            <table><tr>
+              <td class=input><input type=text name=62.approver-position tabindex=60>
+              <td class=label>Location:
+              <td class=input><input type=text name=63.approver-location tabindex=60>
+            </table>
+      </table>
+      <table class=veoci>
+        <caption>Current Situation
+        <tr>
+          <td class="label border-right">Communications
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=70a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=70a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=70a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=70a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=70b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Debris
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=71a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=71a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=71a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=71a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=71b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Flooding
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=72a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=72a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=72a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=72a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=72b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">HazMat
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=73a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=73a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=73a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=73a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=73b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Emergency Services
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=74a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=74a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=74a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=74a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=74b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Casualties
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=75a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=75a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=75a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=75a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=75b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Utilities (Gas)
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=76a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=76a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=76a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=76a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=76b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Utilities (Electric)
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=77a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=77a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=77a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=77a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=77b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Infrastructure (Power)
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=78a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=78a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=78a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=78a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=78b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Infrastructure (Water)
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=79a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=79a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=79a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=79a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=79b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Infrastructure (Sewer)
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=80a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=80a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=80a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=80a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=80b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Search and Rescue
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=81a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=81a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=81a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=81a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=81b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Transportation (Roads)
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=82a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=82a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=82a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=82a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=82b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Transportation (Bridges)
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=83a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=83a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=83a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=83a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=83b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Civil Unrest
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=84a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=84a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=84a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=84a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=84b.comments tabindex=70></textarea>
+            </table>
+        <tr>
+          <td class="label border-right">Animal Issues
+          <td class="input nest">
+            <table>
+              <tr>
+                <td class=label>Status:
+                <td class=input>
+                  <table class=boxgroup><tr>
+                    <td><input type=radio name=85a.status value=Normal tabindex=70>Normal
+                    <td><input type=radio name=85a.status value=Problem tabindex=70>Problem
+                    <td><input type=radio name=85a.status value=Failure tabindex=70>Failure
+                    <td><input type=radio name=85a.status value=Unknown tabindex=70>Unknown
+                  </table>
+              <tr>
+                <td class=label>Comments:
+                <td class=input><textarea name=85b.comments tabindex=70></textarea>
+            </table>
+      </table>
+      <table class=veoci>
+        <caption>Lifeline Status
+        <tr>
+          <td class=label>Lifeline Status:
+          <td class=input>
+            <table class=boxgroup><tr>
+              <td><input type=radio name=90.lifeline-status value=Stable tabindex=90>Stable
+              <td><input type=radio name=90.lifeline-status value=Stabilizing tabindex=90>Stabilizing
+              <td><input type=radio name=90.lifeline-status value=Unstable tabindex=90>Unstable
+              <td><input type=radio name=90.lifeline-status value=Unknown tabindex=90>Unknown
+            </table>
+        <tr>
+          <td class=label>Update:
+          <td class=input><textarea name=91.lifeline-update tabindex=90></textarea>
+        <tr>
+          <td class=label>Unmet Needs:
+          <td class=input><textarea name=92.unmet-needs tabindex=90></textarea>
+      </table>
+      <%#include%>resources/html/scco-footer.html<%/include%>
+    </form>
+    <%#include%>resources/html/submit-buttons.html<%/include%>
+  </body>
+</html>

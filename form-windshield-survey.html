@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=Content-Type content=text/html;charset=UTF-8>
+    <link rel=stylesheet type=text/css href=resources/css/loading.css/>
+    <link rel=stylesheet type=text/css href=resources/css/pack-it-forms.css/>
+    <style>.annotation { font-size: 80%; font-weight: normal }</style>
+    <script type=text/javascript src=resources/js/pack-it-forms.js></script>
+    <script type=text/javascript src=resources/integration/integration.js></script>
+    <meta name=pack-it-forms-pdf-URL content=pdf/Windshield_Survey_v20250703.pdf>
+    <meta name=pack-it-forms-subject-suffix content=_WSSurvey_{{field:22.address}}>
+    <title>Windshield Survey</title>
+  </head>
+
+  <body>
+    <div class=version>0.1</div>
+    <%#include%>resources/html/loading.html<%/include%>
+    <form id=the-form name=the-form>
+      <%#run%>include('resources/html/scco-header.html', {
+          "title": "Windshield Survey",
+          "version": "Veoci: 20250523<br/>PIF: {{version}}",
+          "to-ics-position": "Situation Analysis Unit; Planning Section",
+          "to-location": "County EOC",
+        })
+      <%/run%>
+      <table class=veoci>
+        <caption>Overview
+        <tr>
+          <td class=label>Jurisdiction:
+          <td class=input>
+            <%#run%>include('resources/html/jurisdiction.html', {
+                name: "20.jurisdiction",
+                tabindex: "20",
+              })
+            <%/run%>
+        <tr>
+          <td class=label>Team:<br><span class=annotation>(or individual’s name)</span>
+          <td class=input><input type=text name=21.team tabindex=20 required>
+        <tr>
+          <td class=label>Survey Address:
+          <td class=input><input type=text name=22.address tabindex=20 required>
+        <tr>
+          <td class=label>Item:
+          <td class=input>
+            <table class="boxgroup required-group"><tr>
+              <td><input type=checkbox name=23a.item-building tabindex=20 required>Building
+              <td><input type=checkbox name=23b.item-road tabindex=20 required>Road
+            </table>
+        <tr>
+          <td class=label>Building Type:
+          <td class=input>
+            <table class=boxgroup>
+              <tr>
+                <td><input type=radio name=24.type value=Single tabindex=20>Single Family Home
+                <td><input type=radio name=24.type value=Mobile tabindex=20>Mobile Home or Trailer
+              <tr>
+                <td><input type=radio name=24.type value=Townhouse tabindex=20>Townhouse or Condo
+                <td><input type=radio name=24.type value=Business tabindex=20>Business
+              <tr>
+                <td><input type=radio name=24.type value=Apartment tabindex=20>Apartment
+            </table>
+        <tr>
+          <td class=label>Damage Categorization:
+          <td class=input>
+            <table class="boxgroup required-group">
+              <tr>
+                <td><input type=radio name=25.damage value=Affected tabindex=20 required>Affected
+                <td><input type=radio name=25.damage value=Major tabindex=20 required>Major
+              <tr>
+                <td><input type=radio name=25.damage value=Minor tabindex=20 required>Minor
+                <td><input type=radio name=25.damage value=Destroyed tabindex=20 required>Destroyed
+            </table>
+        <tr>
+          <td class=label>Safety Hazards /<br>Other Damage Observed:
+          <td class=input><textarea name=26.hazards tabindex=20></textarea>
+      </table>
+      <%#include%>resources/html/scco-footer.html<%/include%>
+    </form>
+    <%#include%>resources/html/submit-buttons.html<%/include%>
+  </body>
+</html>

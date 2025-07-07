@@ -1,0 +1,167 @@
+Here is what the pack-it-forms.js actually does, chronologically.
+
+On script load:
+
+1.  Initialize global variables.
+2.  Create the FormDataParseError class.
+3.  Create the newMessage namespace.
+4.  Create the ComboBox class.
+5.  Add an event listener for 'error'.
+6.  Register startup functions.
+
+On page load, run the startup functions, in order:
+
+1.  Anything registered at the 'early_startup' integration point.
+    a.  AHFacStat uses this to copy 1b.time to 22t.time, and to set all-or-none
+        on some fields.
+2.  load_form_version:  set versions.form to content of <div class=version>.
+3.  Anything registered at the 'expand_includes' integration point.
+    a.  pacread/integration uses this to process HTML includes, but it doesn't
+        appear that pacread is used anymore.
+4.  update_error_log: add any errors that occurred before loading was complete
+    to the <div id=error-log> element.
+5.  check_boiler_plate:
+    a.  Ensures that <div id=error-log> <div id=button-header> and
+        <div id=form-data> exist; raises errors if they don't.
+    b.  Creates a ComboBox instance for each <table class=combobox>.
+6.  Anything registered at the 'load_configuration' integration point:
+    a.  Several older forms use this to add ComboBox allowed values, configure
+        shadow compatibility fields, and set up other field-specific behavior.
+7.  load_form_configuration: 
+    a.  Reads <meta name=pack-it-forms-subject-prefix> into
+        newMessage.subjectPrefix, and ditto for suffix.
+    b.  If <meta name=pack-it-forms-pdf-url> is present, shows the
+        <button id=show-PDF-form> and sets a click handler on it to open the
+        specified URL.
+8.  setup_select_colors:  Finds <option data-background-color> elements.  Does
+    a bunch of fancy footwork to change the color names to color values, set
+    the background colors as specified, and set the foreground colors when
+    needed for contrast.  This mechanism is used only in the OA Jurisdiction
+    Status form.
+9.  Anything registered at the 'get_old_message' integration point:
+    a.  Outpost integration uses this to set newMessage fields based on the
+        message envelope, and also starts a 30 second interval timer to ping
+        the Outpost server to show that this form is still open.
+    b.  The Los Altos DA form uses this to set a couple of form fields based
+        on message contents.
+    c.  The checkin-out form uses this to parse the checkin-out message and
+        set form fields.
+    d.  The RACES MAR form uses this to initialize the rows of the form based
+        on their contents.
+10. init_form:  
+    a.  Sets up focus tracking for the form.
+    b.  Wait 10ms for the DOM to settle.
+    c.  find_default_values:
+        a.  Finds templates in <xxx class=templated> or <input value="..."> (but
+            not those with class=no-load-init).  Adds those without a name to
+            templatedElements.  Adds those with a name to formDefaultValues.
+        b.  Finds elements with data-default-value (but not those with
+            class=no-load-init).  Adds those without a name or with a template
+            to templatedElements.  Adds the remainder to formDefaultValues.
+    d.  set_form_default_values:
+        a.  For each item in templatedElements, init the value by expanding the
+            template.
+        b.  For each item in formDefaultValues, init the value from the default,
+            expanding templates.
+        c.  For each field in the message being loaded, init the value from the
+            message (no template expansion).  But skip fields with
+            class=no-msg-init.
+11. Anything registered at the 'setup_inputs' integration point:
+    a.  setup_inputs:
+        a.  Set handlers and appearance on class=required-group.
+        b.  setup_input_from_classes for each element:
+            a.  Set default placeholder based on data type class.
+            b.  Set tooltip to match placeholder.
+            c.  Set patterns for text fields based on data type class.
+            d.  Set shift-click event listener for nonrequired radio buttons.
+        c.  Remove disabled from empty required fields.
+        d.  Add instead-of elements for printing.
+        e.  Set a bubbled event listener for input events.
+        f.  Encode the message into <div id=form-data>.
+    b.  The CPOD forms set up automatic calculation of Qty Available fields.
+    c.  The Notable Reports form sets up show/hide of conditional fields.
+    d.  The RACES-MAR form copies some fields between pages, and sets up
+        conditional contents of role select boxes.
+12. setup_view_mode:  Adjusts various things in the form if we're showing a
+    readonly form rather than editing.
+13. setup_error_indicator sets an event handler on the error indicator (which
+    is only visible if there was an error).
+14. Anything registered at the 'late_startup' integration point:
+    a.  Outpost integration uses this to set up all of the button actions and
+        labels at the top of the form.
+    b.  The OA Shelter Status form uses this to select "Other" if the manager
+        field isn't a known value.
+    c.  The RACES-MAR form uses this to change the background color of the
+        banner.
+    d.  The Los Altos DA form uses this to set up a bunch of form field
+        constraints.
+    e.  The 911 form uses this to hide some buttons on readonly forms.
+    f.  The EOC213RR form uses this to copy the message time to the time field.
+    g.  The AHFacStat form uses this to initialize form controls.
+15. remove_loading_overlay:  removes the overlay and puts the focus on the
+    first erroneous field or first field.
+
+
+Event Listeners:
+
+'change' on element with fromName passed to copy_initial_value:
+    Copy the fromName element's value to the intoName element, if the latter
+    doesn't already have a value.  check_the_form_validity if any changes
+    made.  (copy_initial_value is used by EOC213RR and AHFacStat to copy
+    the message time to the form time.)
+
+'change' and 'input' on element with name newField passed to compatible_values:
+    Sets the value of the oldField to the new value of newField, if it's in
+    the compatible list, otherwise to the fallbackValue.  compatible_values is
+    used by OA Jurisdiction Status and OA Shelter Status for shadow fields for
+    backward compatibility with ComboBoxes.
+
+'change' and/or 'input' on <input type=text> and <textarea>, updating the value
+    of the sidecar print-only element.
+
+'change' on <xxx class=required-group> adjusts the required attributes of the
+    controls in the group and the invalid class on the group.  Also calls
+    check_the_form_validity.
+
+'change' on select with background colors:
+    Update the background color of the select.
+
+'click' on non-required radio button unchecks it.
+
+'click' on Submit to Outpost encodes the message to <div id=form-data>.  If
+    it's valid, it runs anything registered at the before_submit_new_message
+    integration point, and then submits <form id=form-data-form>, which is a
+    post to http://127.0.0.1:9334/send.
+    a.  Outpost integration clears the "should save message" flag.
+    b.  Checkin-out and 911 forms update the subject line.
+
+'click' on Submit via Email calls email_submit.
+    a.  Changes the value of <input type=text name=Other> to "email".
+    b.  Encodes the message to <div id=form-data>.  If it's valid, it runs
+        anything registered at the email_message integration point.
+        a.  Checkin-out and 911 forms update the subject line.
+        b.  Outpost integration submits <form id=form-data-form> to the
+            emailURL provided in the environment given to the page.
+
+'click' on Reset Form calls clear_form, which runs anything registered at the
+    reset_form integration point.  This clears the form and resets default
+    values.
+
+'click' on Show PDF opens the URL in <meta name=pack-it-forms-pdf-url>.
+
+'click' on Show Text Message calls toggle_form_data_visibility.
+
+'error' on window:
+    Log the error.
+
+'focus' on the form:
+    Save as 'last_active_form_element'.
+    
+'input' on the form:
+    Write the changed message to <div id=form-data> and check_the_form_validity.
+    Also runs anything registered at the 'form_input' integration point:
+    a.  Outpost integration sets the "should save message" flag.
+    b.  AHFacStat updates the all-or-none controls.
+
+'load' on window:
+    Run the whole sequence above.
