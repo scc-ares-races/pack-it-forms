@@ -1,14 +1,19 @@
 
-ADDON -fn Check-In/Out Message          -a SCCoPIFO -t form-checkin-out.html
-ADDON -fn Allied Health Facility Status -a SCCoPIFO -t form-allied-health-facility-status.html
-ADDON -fn CPOD Commodities Update       -a SCCoPIFO -t form-cpod-update.html
-ADDON -fn CPOD Site Information         -a SCCoPIFO -t form-cpod-site.html
-ADDON -fn Damage Assessment             -a SCCoPIFO -t form-damage-assessment.html
-ADDON -fn ICS-213 Message               -a SCCoPIFO -t form-ics213.html
-ADDON -fn Notable Report                -a SCCoPIFO -t form-notable-report.html
-ADDON -fn RACES Mutual Aid Request      -a SCCoPIFO -t form-oa-mutual-aid-request-v3.html
-ADDON -fn Resource Request              -a SCCoPIFO -t form-resource-request.html
-ADDON -fn Road Closure                  -a SCCoPIFO -t form-road-closure.html
-ADDON -fn Shelter                       -a SCCoPIFO -t form-shelter.html
-ADDON -fn Situation Report              -a SCCoPIFO -t form-situation-report.html
-ADDON -fn Windshield Survey             -a SCCoPIFO -t form-windshield-survey.html
+ADDON -fn XSC Check-In/Out Message          -a SCCoPIFO -t form-checkin-out.html
+ADDON -fn XSC Allied Health Facility Status -a SCCoPIFO -t form-allied-health-facility-status.html
+ADDON -fn XSC CPOD Commodities Update       -a SCCoPIFO -t form-cpod-update.html
+ADDON -fn XSC CPOD Site Information         -a SCCoPIFO -t form-cpod-site.html
+ADDON -fn XSC Damage Assessment             -a SCCoPIFO -t form-damage-assessment.html
+ADDON -fn XSC ICS-213 Message               -a SCCoPIFO -t form-ics213.html
+ADDON -fn XSC Notable Report                -a SCCoPIFO -t form-notable-report.html
+ADDON -fn XSC RACES Mutual Aid Request      -a SCCoPIFO -t form-oa-mutual-aid-request-v3.html
+ADDON -fn XSC Resource Request              -a SCCoPIFO -t form-resource-request.html
+ADDON -fn XSC Road Closure                  -a SCCoPIFO -t form-road-closure.html
+ADDON -fn XSC Shelter                       -a SCCoPIFO -t form-shelter.html
+ADDON -fn XSC Situation Report              -a SCCoPIFO -t form-situation-report.html
+ADDON -fn XSC Windshield Survey             -a SCCoPIFO -t form-windshield-survey.html
+LINE
+ADDON -fn OLD EOC-213RR Resource Request    -a SCCoPIFO -t form-scco-eoc-213rr.html
+ADDON -fn OLD OA Jurisdiction Status        -a SCCoPIFO -t form-oa-muni-status.html
+ADDON -fn OLD OA Shelter Status             -a SCCoPIFO -t form-oa-shelter-status.html
+
