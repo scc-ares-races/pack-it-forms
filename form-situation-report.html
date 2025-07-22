@@ -12,35 +12,39 @@
   </head>
 
   <body>
-    <div class=version>0.1</div>
+    <div class=version>0.3</div>
     <%#include%>resources/html/loading.html<%/include%>
     <form id=the-form name=the-form>
       <%#run%>include('resources/html/scco-header.html', {
           "title": "Situation Report",
-          "version": "Veoci: 20250702<br/>PIF: {{version}}",
-          "to-ics-position": "Situation Analysis Unit; Planning Section",
+          "version": "PDF: 20250721<br/>PIF: {{version}}",
+          "handling": "IMMEDIATE",
+          "to-ics-position": "Situational Analysis Unit; Common Operating Picture Spec.; Planning",
           "to-location": "County EOC",
         })
       <%/run%>
       <table class=veoci>
         <caption>Overview
         <tr>
-          <td class=label>Jurisdiction:
-          <td class=input>
-            <%#run%>include('resources/html/jurisdiction.html', {
-                name: "20.jurisdiction",
-                tabindex: "20",
-              })
-            <%/run%>
-        <tr>
-          <td class=label>Incident Name:
+          <td class=label>Prepared Date:
           <td class="input nest">
             <table><tr>
-              <td class=input><input type=text name=21.incident-name tabindex=20 required>
-              <td class=label>Prepared Date:
-              <td class=input><input type=text name=22d.prepared-date class=date tabindex=20 required>
+              <td class=input><input type=text name=20d.prepared-date class=date tabindex=20 required>
               <td class=label>Prepared Time:
-              <td class=input><input type=text name=22t.prepared-time class=time tabindex=20 required>
+              <td class=input><input type=text name=20t.prepared-time class=time tabindex=20 required>
+            </table>
+        <tr>
+          <td class=label>Jurisdiction:
+          <td class="input nest">
+            <table><tr>
+              <td class=input>
+                <%#run%>include('resources/html/jurisdiction.html', {
+                    name: "21.jurisdiction",
+                    tabindex: "20",
+                  })
+                <%/run%>
+              <td class=label>Incident Name:
+              <td class=input><input type=text name=22.incident-name tabindex=20 required>
             </table>
         <tr>
           <td class=label>Emergency Declaration:
@@ -57,14 +61,17 @@
               <tr>
                 <td><input type=radio name=24.eoc value=Normal tabindex=20>Normal
                 <td><input type=radio name=24.eoc value="Duty Officer" tabindex=20>Duty Officer
-                <td><input type=radio name=24.eoc value=Monitar tabindex=20>Monitor
+                <td><input type=radio name=24.eoc value=Monitor tabindex=20>Monitor
               <tr>
                 <td><input type=radio name=24.eoc value=Partial tabindex=20>Partial
                 <td><input type=radio name=24.eoc value=Full tabindex=20>Full
             </table>
         <tr>
           <td class=label>Incident Description:
-          <td class=input><textarea name=25.description tabindex=20 required></textarea>
+          <td class=input><textarea name=25.description tabindex=20></textarea>
+        <tr>
+          <td class=label>Additional Incident<br>Information:
+          <td class=input><textarea name=26.addl-info tabindex=20></textarea>
       </table>
       <table class=veoci>
         <caption>Reported By
@@ -81,10 +88,6 @@
           <td class=input><input type=text name=32.preparer-email tabindex=30>
       </table>
       <table class=veoci>
-        <caption>Additional Incident Information
-        <tr><td><textarea name=40.addl-info tabindex=40></textarea>
-      </table>
-      <table class=veoci>
         <caption>Government Office Status
         <tr>
           <td class=label>Office Status:
@@ -98,9 +101,17 @@
           <td class=label>Expected to Open Date:
           <td class="input nest">
             <table><tr>
-              <td class=input><input type=text name=51.office-open class=date tabindex=50>
-              <td class=label>Expected to Close Date:
-              <td class=input><input type=text name=52.office-close class=date tabindex=50>
+              <td class=input><input type=text name=51d.office-open-date class=date tabindex=50>
+              <td class=label>Time:
+              <td class=input><input type=text name=51t.office-open-time class=time tabindex=50>
+            </table>
+        <tr>
+          <td class=label>Expected to Close Date:
+          <td class="input nest">
+            <table><tr>
+              <td class=input><input type=text name=52d.office-close-date class=date tabindex=50>
+              <td class=label>Time:
+              <td class=input><input type=text name=52t.office-close-time class=time tabindex=50>
             </table>
       </table>
       <table class=veoci>
@@ -402,18 +413,18 @@
         <tr>
           <td class=label>Lifeline Status:
           <td class=input>
-            <table class=boxgroup><tr>
-              <td><input type=radio name=90.lifeline-status value=Stable tabindex=90>Stable
-              <td><input type=radio name=90.lifeline-status value=Stabilizing tabindex=90>Stabilizing
-              <td><input type=radio name=90.lifeline-status value=Unstable tabindex=90>Unstable
-              <td><input type=radio name=90.lifeline-status value=Unknown tabindex=90>Unknown
+            <table class="boxgroup required-group"><tr>
+              <td><input type=radio name=90.lifeline-status value=Stable tabindex=90 required>Stable
+              <td><input type=radio name=90.lifeline-status value=Stabilizing tabindex=90 required>Stabilizing
+              <td><input type=radio name=90.lifeline-status value=Unstable tabindex=90 required>Unstable
+              <td><input type=radio name=90.lifeline-status value=Unknown tabindex=90 required>Unknown
             </table>
         <tr>
           <td class=label>Update:
-          <td class=input><textarea name=91.lifeline-update tabindex=90></textarea>
+          <td class=input><textarea name=91.lifeline-update tabindex=90 required></textarea>
         <tr>
           <td class=label>Unmet Needs:
-          <td class=input><textarea name=92.unmet-needs tabindex=90></textarea>
+          <td class=input><textarea name=92.unmet-needs tabindex=90 required></textarea>
       </table>
       <%#include%>resources/html/scco-footer.html<%/include%>
     </form>

@@ -13,14 +13,14 @@
   </head>
 
   <body>
-    <div class=version>0.1</div>
+    <div class=version>0.3</div>
     <%#include%>resources/html/loading.html<%/include%>
     <form id=the-form name=the-form>
       <%#run%>include('resources/html/scco-header.html', {
           "title": "Windshield Survey",
-          "version": "Veoci: 20250523<br/>PIF: {{version}}",
-          "to-ics-position": "Situation Analysis Unit; Planning Section",
-          "to-location": "County EOC",
+          "version": "PDF: 20250719<br/>PIF: {{version}}",
+          "handling": "ROUTINE",
+          "to-ics-position": "Damage/Safety Assessment Group; Construction & Eng. Branch; Operations",
         })
       <%/run%>
       <table class=veoci>
@@ -34,17 +34,18 @@
               })
             <%/run%>
         <tr>
-          <td class=label>Team:<br><span class=annotation>(or individual’s name)</span>
+          <td class=label>Team:
           <td class=input><input type=text name=21.team tabindex=20 required>
         <tr>
-          <td class=label>Survey Address:
-          <td class=input><input type=text name=22.address tabindex=20 required>
+          <td class=label>Location:
+          <td class=input><input type=text name=22.location tabindex=20 required>
         <tr>
           <td class=label>Item:
           <td class=input>
             <table class="boxgroup required-group"><tr>
-              <td><input type=checkbox name=23a.item-building tabindex=20 required>Building
-              <td><input type=checkbox name=23b.item-road tabindex=20 required>Road
+              <td><input type=radio name=23.item value=Building tabindex=20 required>Building
+              <td><input type=radio name=23.item value=Road tabindex=20 required>Road
+              <td><input type=radio name=23.item value=Other tabindex=20 required>Other
             </table>
         <tr>
           <td class=label>Building Type:
@@ -58,21 +59,25 @@
                 <td><input type=radio name=24.type value=Business tabindex=20>Business
               <tr>
                 <td><input type=radio name=24.type value=Apartment tabindex=20>Apartment
+                <td><input type=radio name=24.type value=Other tabindex=20>Other <span class=annotation>(describe below)</span>
             </table>
+        <tr>
+          <td class=label>Number of Stories:
+          <td class=input><input type=text name=25.stories class=cardinal-number tabindex=20>
         <tr>
           <td class=label>Damage Categorization:
           <td class=input>
             <table class="boxgroup required-group">
               <tr>
-                <td><input type=radio name=25.damage value=Affected tabindex=20 required>Affected
-                <td><input type=radio name=25.damage value=Major tabindex=20 required>Major
+                <td><input type=radio name=26.damage value=Affected tabindex=20 required>Affected
+                <td><input type=radio name=26.damage value=Major tabindex=20 required>Major
               <tr>
-                <td><input type=radio name=25.damage value=Minor tabindex=20 required>Minor
-                <td><input type=radio name=25.damage value=Destroyed tabindex=20 required>Destroyed
+                <td><input type=radio name=26.damage value=Minor tabindex=20 required>Minor
+                <td><input type=radio name=26.damage value=Destroyed tabindex=20 required>Destroyed
             </table>
         <tr>
           <td class=label>Safety Hazards /<br>Other Damage Observed:
-          <td class=input><textarea name=26.hazards tabindex=20></textarea>
+          <td class=input><textarea name=27.hazards tabindex=20></textarea>
       </table>
       <%#include%>resources/html/scco-footer.html<%/include%>
     </form>

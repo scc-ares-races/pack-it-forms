@@ -6,8 +6,8 @@ Function ChooseAddonFiles
   SetOutPath "$INSTDIR\pack-it-forms"
   File built\pack-it-forms\form-allied-health-facility-status*.html
   File built\pack-it-forms\form-checkin-out.html
-  File built\pack-it-forms\form-cpod-site.html
-  File built\pack-it-forms\form-cpod-update.html
+  File built\pack-it-forms\form-cpod-commodities.html
+  File built\pack-it-forms\form-cpod-site-info.html
   File built\pack-it-forms\form-damage-assessment.html
   File built\pack-it-forms\form-ics213.html
   File built\pack-it-forms\form-notable-report.html
@@ -20,6 +20,7 @@ Function ChooseAddonFiles
   File built\pack-it-forms\form-shelter.html
   File built\pack-it-forms\form-situation-report.html
   File built\pack-it-forms\form-windshield-survey.html
+  File pack-it-forms\new-forms.txt
 
   SetOutPath "$INSTDIR\pdf"
   File pack-it-forms\pdf\Allied_Health_Facility_Status_*.pdf

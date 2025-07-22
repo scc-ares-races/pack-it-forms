@@ -4,11 +4,7 @@
     <meta http-equiv=Content-Type content=text/html;charset=UTF-8>
     <link rel=stylesheet type=text/css href=resources/css/loading.css/>
     <link rel=stylesheet type=text/css href=resources/css/pack-it-forms.css/>
-    <style>
-      .annotation {
-        font-size: 80%;
-      }
-    </style>
+    <style>.annotation { font-size: 80%; font-weight: normal }</style>
     <script type=text/javascript src=resources/js/pack-it-forms.js></script>
     <script type=text/javascript src=resources/integration/integration.js></script>
     <meta name=pack-it-forms-pdf-URL content=pdf/Road_Closure_v20250701.pdf>
@@ -17,13 +13,14 @@
   </head>
 
   <body>
-    <div class=version>0.1</div>
+    <div class=version>0.3</div>
     <%#include%>resources/html/loading.html<%/include%>
     <form id=the-form name=the-form>
       <%#run%>include('resources/html/scco-header.html', {
           "title": "Road Closure",
-          "version": "Veoci: 20250523<br/>PIF: {{version}}",
-          "to-ics-position": "Situation Analysis Unit; Planning Section",
+          "version": "PDF: 20250721<br/>PIF: {{version}}",
+          "handling": "ROUTINE",
+          "to-ics-position": "Public Works Group; Construction & Eng. Branch; Operations",
           "to-location": "County EOC",
         })
       <%/run%>

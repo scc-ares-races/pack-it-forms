@@ -4,11 +4,7 @@
     <meta http-equiv=Content-Type content=text/html;charset=UTF-8>
     <link rel=stylesheet type=text/css href=resources/css/loading.css/>
     <link rel=stylesheet type=text/css href=resources/css/pack-it-forms.css/>
-    <style>
-      .annotation {
-        font-size: 80%;
-      }
-    </style>
+    <style>.annotation { font-size: 80%; font-weight: normal }</style>
     <script type=text/javascript src=resources/js/pack-it-forms.js></script>
     <script type=text/javascript src=resources/integration/integration.js></script>
     <meta name=pack-it-forms-pdf-URL content=pdf/Shelter_v20250701.pdf>
@@ -17,14 +13,14 @@
   </head>
 
   <body>
-    <div class=version>0.1</div>
+    <div class=version>0.3</div>
     <%#include%>resources/html/loading.html<%/include%>
     <form id=the-form name=the-form>
       <%#run%>include('resources/html/scco-header.html', {
           "title": "Shelter Form",
-          "version": "Veoci: 20250523<br/>PIF: {{version}}",
-          "to-ics-position": "Situation Analysis Unit; Planning Section",
-          "to-location": "County EOC",
+          "version": "PDF: 20250719<br/>PIF: {{version}}",
+          "handling": "PRIORITY",
+          "to-ics-position": "Care & Shelter Unit; Mass Care & Emerg. Asst. Branch; Operations",
         })
       <%/run%>
       <table class=veoci>
@@ -41,26 +37,19 @@
           <td class=label>Shelter Name:
           <td class=input><input type=text name=21.shelter-name tabindex=20 required>
         <tr>
-          <td class=label>Address:
-          <td class=input><input type=text name=22.address tabindex=20 required>
+          <td class=label>Location:
+          <td class=input><input type=text name=22.location tabindex=20 required>
         <tr>
           <td class=label-top>Type:<br><span class=annotation>(multi-select)</span>
           <td class=input>
-            <table class=boxgroup>
+            <table class="boxgroup required-group">
               <tr>
-                <td><input type=checkbox name=23a.type-family tabindex=20>Family
-                <td><input type=checkbox name=23e.type-animals tabindex=20>Large Animals
-                <td><input type=checkbox name=23h.type-arc-partner tabindex=20>ARC Partner
+                <td><input type=checkbox name=23a.type-congregate tabindex=20 required>Congregate
+                <td><input type=checkbox name=23c.type-tep tabindex=20 required>Temporary Evacuation Point
+                <td><input type=checkbox name=23e.type-animals tabindex=20 required>Large Animals
               <tr>
-                <td><input type=checkbox name=23b.type-women tabindex=20>Women Only
-                <td><input type=checkbox name=23f.type-arc-managed tabindex=20>ARC Managed
-                <td><input type=checkbox name=23i.type-gov-managed tabindex=20>Government Managed
-              <tr>
-                <td><input type=checkbox name=23c.type-tep tabindex=20>Temporary Evacuation Point
-                <td><input type=checkbox name=23g.type-arc-support tabindex=20>ARC Supported
-                <td><input type=checkbox name=23j.type-indep tabindex=20>Independent
-              <tr>
-                <td><input type=checkbox name=23d.type-pets tabindex=20>Pets Accepted
+                <td><input type=checkbox name=23b.type-non-congregate tabindex=20 required>Non-Congregate
+                <td><input type=checkbox name=23d.type-pets tabindex=20 required>Pets Accepted
             </table>
         <tr>
           <td class=label>Shelter Status:
@@ -122,22 +111,22 @@
         <tr>
           <td class=label>Managed By:
           <td class=input>
-            <table class=boxgroup>
+            <table class="boxgroup required-group">
               <tr>
-                <td><input type=radio name=40.managed-by value="American Red Cross" tabindex=40>American Red Cross
-                <td><input type=radio name=40.managed-by value=Community tabindex=40>Community
-                <td><input type=radio name=40.managed-by value=Other tabindex=40>Other
+                <td><input type=radio name=40.managed-by value=ARC tabindex=40 required>American Red Cross
+                <td><input type=radio name=40.managed-by value=Government tabindex=40 required>Government
+                <td><input type=radio name=40.managed-by value=Community tabindex=40 required>Community
               <tr>
-                <td><input type=radio name=40.managed-by value=Private tabindex=40>Private
-                <td><input type=radio name=40.managed-by value=Government tabindex=40>Government
+                <td><input type=radio name=40.managed-by value=Private tabindex=40 required>Private
+                <td><input type=radio name=40.managed-by value=Other tabindex=40 required>Other
             </table>
         <tr>
           <td class=label>Primary Contact Name:
           <td class="input nest">
             <table><tr>
-              <td class=input><input type=text name=41.contact-name tabindex=40>
+              <td class=input><input type=text name=41.contact-name tabindex=40 required>
               <td class=label>Primary Contact Phone Number:
-              <td class=input><input type=text name=42.contact-phone class=phone-number tabindex=40>
+              <td class=input><input type=text name=42.contact-phone class=phone-number tabindex=40 required>
             </table>
         <tr>
           <td class=label>Primary Contact Email:

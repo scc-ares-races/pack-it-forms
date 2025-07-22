@@ -1,12 +1,17 @@
-
-ADDON -fn Check-In/Out Message          -a SCCoPIFO -t form-checkin-out.html
-ADDON -fn Allied Health Facility Status -a SCCoPIFO -t form-allied-health-facility-status.html
-ADDON -fn CPOD Commodities Update       -a SCCoPIFO -t form-cpod-update.html
-ADDON -fn CPOD Site Information         -a SCCoPIFO -t form-cpod-site.html
+ADDON -fn XSC Check-In/Out Message          -a SCCoPIFO -t form-checkin-out.html
+ADDON -fn XSC ICS-213 Message               -a SCCoPIFO -t form-ics213.html
+ADDON -fn XSC EOC-213RR Resource Request    -a SCCoPIFO -t form-scco-eoc-213rr.html
+ADDON -fn XSC OA Jurisdiction Status        -a SCCoPIFO -t form-oa-muni-status.html
+ADDON -fn XSC OA Shelter Status             -a SCCoPIFO -t form-oa-shelter-status.html
+ADDON -fn XSC Allied Health Facility Status -a SCCoPIFO -t form-allied-health-facility-status.html
+ADDON -fn XSC RACES Mutual Aid Request      -a SCCoPIFO -t form-oa-mutual-aid-request-v3.html
+LINE
+BIN	-fn *** NEW FORMS FOR TEST ***     -p C:\Windows\System32\notepad.exe -o c:\PackItForms\Outpost\SCCo\pack-it-forms\new_forms.txt
+LINE
+ADDON -fn CPOD Commodities Update       -a SCCoPIFO -t form-cpod-commodities.html
+ADDON -fn CPOD Site Information         -a SCCoPIFO -t form-cpod-site-info.html
 ADDON -fn Damage Assessment             -a SCCoPIFO -t form-damage-assessment.html
-ADDON -fn ICS-213 Message               -a SCCoPIFO -t form-ics213.html
 ADDON -fn Notable Report                -a SCCoPIFO -t form-notable-report.html
-ADDON -fn RACES Mutual Aid Request      -a SCCoPIFO -t form-oa-mutual-aid-request-v3.html
 ADDON -fn Resource Request              -a SCCoPIFO -t form-resource-request.html
 ADDON -fn Road Closure                  -a SCCoPIFO -t form-road-closure.html
 ADDON -fn Shelter                       -a SCCoPIFO -t form-shelter.html

@@ -34,13 +34,14 @@
   </head>
 
   <body>
-    <div class=version>0.2</div>
+    <div class=version>0.3</div>
     <%#include%>resources/html/loading.html<%/include%>
     <form id=the-form name=the-form>
       <%#run%>include("resources/html/scco-header.html", {
           "title": "CPOD Commodities Update Form",
-          "version": "Veoci: 20250527<br/>PIF: {{version}}",
-          "to-ics-position": "Situation Analysis Unit; Planning Section",
+          "version": "PDF: 20250721<br/>PIF: {{version}}",
+          "handling": "ROUTINE",
+          "to-ics-position": "CPOD Unit; Mass Care & Emerg. Asst. Branch; Operations",
           "to-location": "County EOC"
         })
       <%/run%>
@@ -48,21 +49,18 @@
         <caption>Overview
         <tr>
           <td class=label>Jurisdiction:
-          <td class=input>
-            <%#run%>include('resources/html/jurisdiction.html', {
-                name: "20.jurisdiction",
-                tabindex: "20",
-              })
-            <%/run%>
-        <tr>
-          <td class=label>Incident Name:
           <td class="input nest">
             <table><tr>
-              <td class=input><input type=text name=21.incident-name tabindex=20 required>
+              <td class=input>
+                <%#run%>include('resources/html/jurisdiction.html', {
+                    name: "20.jurisdiction",
+                    tabindex: "20",
+                  })
+                <%/run%>
               <td class=label>Prepared Date:
-              <td class=input><input type=text name=22d.prepared-date class=date tabindex=20 required>
+              <td class=input><input type=text name=21d.prepared-date class=date value={{date}} tabindex=20 required>
               <td class=label>Prepared Time:
-              <td class=input><input type=text name=22t.prepared-time class=time tabindex=20 required>
+              <td class=input><input type=text name=21t.prepared-time class=time tabindex=20 required>
             </table>
       </table>
       <table class=veoci>
@@ -70,6 +68,18 @@
         <tr>
           <td class=label>Site Name:
           <td class=input><input type=text name=30.site-name tabindex=30 required>
+        <tr>
+          <td class=label>Status Update:
+          <td class=input>
+            <table class=boxgroup>
+              <tr>
+                <td><input name=31.status type=radio value=Activated tabindex=30>Activated
+                <td><input name=31.status type=radio value="Pending Demobilization" tabindex=30>Pending Demobilization
+                <td><input name=31.status type=radio value="Not Activated" tabindex=30>Not Activated
+              <tr>
+                <td><input name=31.status type=radio value="Pending Activation" tabindex=30>Pending Activation
+                <td><input name=31.status type=radio value=Demobilization tabindex=30>Demobilization
+            </table>
       </table>
       <table class=veoci>
         <caption>Commodities
@@ -79,13 +89,13 @@
             <table>
               <tr>
                 <td class=label>Type of Commodity:
-                <td class=input><input type=text name=70a.type tabindex=70>
+                <td class=input><input type=text name=70a.type tabindex=70 required>
               <tr><td colspan=2 class=nest>
                 <table><tr>
-                  <td class=label>Qty on Hand:
-                  <td class=input><input type=text name=70b.onhand class=cardinal-number tabindex=70>
+                  <td class=label>Starting Quantity:
+                  <td class=input><input type=text name=70b.onhand class=cardinal-number tabindex=70 required>
                   <td class=label>Qty Distributed:
-                  <td class=input><input type=text name=70c.distributed class=cardinal-number tabindex=70>
+                  <td class=input><input type=text name=70c.distributed class=cardinal-number tabindex=70 required>
                   <td class=label>Qty Available:
                   <td class=input><input type=text id=70d.distributed class=cardinal-number tabindex=-1 disabled>
                 </table>
@@ -99,7 +109,7 @@
                 <td class=input><input type=text name=71a.type tabindex=70>
               <tr><td colspan=2 class=nest>
                 <table><tr>
-                  <td class=label>Qty on Hand:
+                  <td class=label>Starting Quantity:
                   <td class=input><input type=text name=71b.onhand class=cardinal-number tabindex=70>
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=71c.distributed class=cardinal-number tabindex=70>
@@ -116,7 +126,7 @@
                 <td class=input><input type=text name=72a.type tabindex=70>
               <tr><td colspan=2 class=nest>
                 <table><tr>
-                  <td class=label>Qty on Hand:
+                  <td class=label>Starting Quantity:
                   <td class=input><input type=text name=72b.onhand class=cardinal-number tabindex=70>
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=72c.distributed class=cardinal-number tabindex=70>
@@ -133,7 +143,7 @@
                 <td class=input><input type=text name=73a.type tabindex=70>
               <tr><td colspan=2 class=nest>
                 <table><tr>
-                  <td class=label>Qty on Hand:
+                  <td class=label>Starting Quantity:
                   <td class=input><input type=text name=73b.onhand class=cardinal-number tabindex=70>
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=73c.distributed class=cardinal-number tabindex=70>
@@ -150,7 +160,7 @@
                 <td class=input><input type=text name=74a.type tabindex=70>
               <tr><td colspan=2 class=nest>
                 <table><tr>
-                  <td class=label>Qty on Hand:
+                  <td class=label>Starting Quantity:
                   <td class=input><input type=text name=74b.onhand class=cardinal-number tabindex=70>
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=74c.distributed class=cardinal-number tabindex=70>
@@ -167,7 +177,7 @@
                 <td class=input><input type=text name=75a.type tabindex=70>
               <tr><td colspan=2 class=nest>
                 <table><tr>
-                  <td class=label>Qty on Hand:
+                  <td class=label>Starting Quantity:
                   <td cllabelut><input type=text name=75b.onhand class=cardinal-number tabindex=70>
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=75c.distributed class=cardinal-number tabindex=70>
@@ -184,7 +194,7 @@
                 <td class=input><input type=text name=76a.type tabindex=70>
               <tr><td colspan=2 class=nest>
                 <table><tr>
-                  <td class=label>Qty on Hand:
+                  <td class=label>Starting Quantity:
                   <td class=input><input type=text name=76b.onhand class=cardinal-number tabindex=70>
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=76c.distributed class=cardinal-number tabindex=70>
@@ -201,7 +211,7 @@
                 <td class=input><input type=text name=77a.type tabindex=70>
               <tr><td colspan=2 class=nest>
                 <table><tr>
-                  <td class=label>Qty on Hand:
+                  <td class=label>Starting Quantity:
                   <td class=input><input type=text name=77b.onhand class=cardinal-number tabindex=70>
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=77c.distributed class=cardinal-number tabindex=70>
