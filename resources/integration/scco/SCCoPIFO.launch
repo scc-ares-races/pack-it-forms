@@ -6,7 +6,7 @@ ADDON -fn XSC OA Shelter Status             -a SCCoPIFO -t form-oa-shelter-statu
 ADDON -fn XSC Allied Health Facility Status -a SCCoPIFO -t form-allied-health-facility-status.html
 ADDON -fn XSC RACES Mutual Aid Request      -a SCCoPIFO -t form-oa-mutual-aid-request-v3.html
 LINE
-BIN	-fn *** NEW FORMS FOR TEST ***     -p C:\Windows\System32\notepad.exe -o c:\PackItForms\Outpost\SCCo\pack-it-forms\new_forms.txt
+BIN	-fn *** NEW FORMS FOR TEST ***     -p C:\Windows\System32\notepad.exe -o c:\PackItForms\Outpost\SCCo\pack-it-forms\new-forms.txt
 LINE
 ADDON -fn CPOD Commodities Update       -a SCCoPIFO -t form-cpod-commodities.html
 ADDON -fn CPOD Site Information         -a SCCoPIFO -t form-cpod-site-info.html
