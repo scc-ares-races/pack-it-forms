@@ -1693,9 +1693,13 @@ function setupConditionalElements() {
         if (!the_form[triggerName]) throw `data-conditional="${triggerSpec}": no such element`;
         function onTriggerChange() {
             const value = the_form[triggerName].value;
-            if ((triggerValue && value === triggerValue) || (!triggerValue && value))
+            if ((triggerValue && value === triggerValue) || (!triggerValue && value)) {
                 elm.style.display = null;
-            else {
+                elm.querySelectorAll('[was-required]').forEach(i => {
+                    i.required = true;
+                    i.removeAttribute('was-required')
+                })
+            } else {
                 elm.style.display = 'none';
                 const inputs = {};
                 elm.querySelectorAll('input[type=checkbox],input[type=radio]').forEach(i => {
@@ -1710,7 +1714,12 @@ function setupConditionalElements() {
                         i.dispatchEvent(new Event('change', { bubbles: true }));
                     }
                 });
+                elm.querySelectorAll('[required]').forEach(i => {
+                    i.setAttribute('was-required', '');
+                    i.required = false;
+                })
             }
+            check_the_form_validity();
         }
         document.getElementsByName(triggerName).forEach(tr => {
             tr.addEventListener('change', onTriggerChange);
