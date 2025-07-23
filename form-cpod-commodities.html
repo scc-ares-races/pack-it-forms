@@ -8,28 +8,6 @@
     <script type=text/javascript src="resources/integration/integration.js"></script>
     <meta name=pack-it-forms-pdf-URL content="pdf/CPOD_Commodities_v20250702.pdf">
     <meta name=pack-it-forms-subject-suffix content="_CPODUpd_{{field:30.site-name}}">
-    <script type=text/javascript>
-      integration.after("setup_inputs", function() {
-        function parseIntZ(str) {
-          return str === '' ? 0 : parseInt(str);
-        }
-        function onChangeQty(evt) {
-          const row = evt.target.name.substring(0, 2);
-          const form = document.getElementById('the-form');
-          const onhand = form[`${row}b.onhand`].value;
-          const distributed = form[`${row}c.distributed`].value;
-          if (onhand === '' && distributed === '') {
-            document.getElementById(`${row}d.available`).value = '';
-          } else {
-            document.getElementById(`${row}d.available`).value = parseIntZ(onhand) - parseIntZ(distributed);
-          }
-        }
-        document.querySelectorAll("input.qtycalc").forEach(i => {
-          i.addEventListener('change', onChangeQty);
-          onChangeQty({target: i});
-        });
-      });
-    </script>
     <title>CPOD Commodities Update Form</title>
   </head>
 
@@ -97,7 +75,7 @@
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=70c.distributed class=cardinal-number tabindex=70 required>
                   <td class=label>Qty Available:
-                  <td class=input><input type=text id=70d.distributed class=cardinal-number tabindex=-1 disabled>
+                  <td class=input><input type=text id=70d.available class=cardinal-number tabindex=70 required>
                 </table>
             </table>
         <tr>
@@ -114,7 +92,7 @@
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=71c.distributed class=cardinal-number tabindex=70>
                   <td class=label>Qty Available:
-                  <td class=input><input type=text id=71d.distributed class=cardinal-number tabindex=-1 disabled>
+                  <td class=input><input type=text id=71d.available class=cardinal-number tabindex=70>
                 </table>
             </table>
         <tr>
@@ -131,7 +109,7 @@
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=72c.distributed class=cardinal-number tabindex=70>
                   <td class=label>Qty Available:
-                  <td class=input><input type=text id=72d.distributed class=cardinal-number tabindex=-1 disabled>
+                  <td class=input><input type=text id=72d.available class=cardinal-number tabindex=70>
                 </table>
             </table>
         <tr>
@@ -148,7 +126,7 @@
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=73c.distributed class=cardinal-number tabindex=70>
                   <td class=label>Qty Available:
-                  <td class=input><input type=text id=73d.distributed class=cardinal-number tabindex=-1 disabled>
+                  <td class=input><input type=text id=73d.available class=cardinal-number tabindex=70>
                 </table>
             </table>
         <tr>
@@ -165,7 +143,7 @@
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=74c.distributed class=cardinal-number tabindex=70>
                   <td class=label>Qty Available:
-                  <td class=input><input type=text id=74d.distributed class=cardinal-number tabindex=-1 disabled>
+                  <td class=input><input type=text id=74d.available class=cardinal-number tabindex=70>
                 </table>
             </table>
         <tr>
@@ -182,7 +160,7 @@
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=75c.distributed class=cardinal-number tabindex=70>
                   <td class=label>Qty Available:
-                  <td class=input><input type=text id=75d.distributed class=cardinal-number tabindex=-1 disabled>
+                  <td class=input><input type=text id=75d.available class=cardinal-number tabindex=70>
                 </table>
             </table>
         <tr>
@@ -199,7 +177,7 @@
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=76c.distributed class=cardinal-number tabindex=70>
                   <td class=label>Qty Available:
-                  <td class=input><input type=text id=76d.distributed class=cardinal-number tabindex=-1 disabled>
+                  <td class=input><input type=text id=76d.available class=cardinal-number tabindex=70>
                 </table>
             </table>
         <tr>
@@ -216,7 +194,7 @@
                   <td class=label>Qty Distributed:
                   <td class=input><input type=text name=77c.distributed class=cardinal-number tabindex=70>
                   <td class=label>Qty Available:
-                  <td class=input><input type=text id=77d.distributed class=cardinal-number tabindex=-1 disabled>
+                  <td class=input><input type=text id=77d.available class=cardinal-number tabindex=70>
                 </table>
             </table>
       </table>
