@@ -72,83 +72,83 @@
           <td class=input><input type=text name=70c.distributed class=cardinal-number tabindex=70 required>
           <td class=label>Qty Available:
           <td class=input><input type=text name=70d.available class=cardinal-number tabindex=70 required>
-        <tr data-conditional=70a.type>
+        <tr hidden-until=70a.type>
           <td class="label border-right" rowspan=2>Item 2
           <td class=label>Type of Commodity:
           <td class=input colspan=5><input type=text name=71a.type tabindex=70>
-        <tr data-conditional=71a.type>
+        <tr hidden-until=70a.type>
           <td class=label>Starting Quantity:
-          <td class=input><input type=text name=71b.onhand class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=71b.onhand class=cardinal-number tabindex=70 required-if=71a.type else-disallowed>
           <td class=label>Qty Distributed:
-          <td class=input><input type=text name=71c.distributed class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=71c.distributed class=cardinal-number tabindex=70 required-if=71a.type else-disallowed>
           <td class=label>Qty Available:
-          <td class=input><input type=text name=71d.available class=cardinal-number tabindex=70 required>
-        <tr data-conditional=71a.type>
+          <td class=input><input type=text name=71d.available class=cardinal-number tabindex=70 required-if=71a.type else-disallowed>
+        <tr hidden-until=71a.type>
           <td class="label border-right" rowspan=2>Item 3
           <td class=label>Type of Commodity:
           <td class=input colspan=5><input type=text name=72a.type tabindex=70>
-        <tr data-conditional=72a.type>
+        <tr hidden-until=71a.type>
           <td class=label>Starting Quantity:
-          <td class=input><input type=text name=72b.onhand class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=72b.onhand class=cardinal-number tabindex=70 required-if=72a.type else-disallowed>
           <td class=label>Qty Distributed:
-          <td class=input><input type=text name=72c.distributed class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=72c.distributed class=cardinal-number tabindex=70 required-if=72a.type else-disallowed>
           <td class=label>Qty Available:
-          <td class=input><input type=text name=72d.available class=cardinal-number tabindex=70 required>
-        <tr data-conditional=72a.type>
+          <td class=input><input type=text name=72d.available class=cardinal-number tabindex=70 required-if=72a.type else-disallowed>
+        <tr hidden-until=72a.type>
           <td class="label border-right" rowspan=2>Item 4
           <td class=label>Type of Commodity:
           <td class=input colspan=5><input type=text name=73a.type tabindex=70>
-        <tr data-conditional=73a.type>
+        <tr hidden-until=72a.type>
           <td class=label>Starting Quantity:
-          <td class=input><input type=text name=73b.onhand class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=73b.onhand class=cardinal-number tabindex=70 required-if=73a.type else-disallowed>
           <td class=label>Qty Distributed:
-          <td class=input><input type=text name=73c.distributed class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=73c.distributed class=cardinal-number tabindex=70 required-if=73a.type else-disallowed>
           <td class=label>Qty Available:
-          <td class=input><input type=text name=73d.available class=cardinal-number tabindex=70 required>
-        <tr data-conditional=73a.type>
+          <td class=input><input type=text name=73d.available class=cardinal-number tabindex=70 required-if=73a.type else-disallowed>
+        <tr hidden-until=73a.type>
           <td class="label border-right" rowspan=2>Item 5
           <td class=label>Type of Commodity:
           <td class=input colspan=5><input type=text name=74a.type tabindex=70>
-        <tr data-conditional=74a.type>
+        <tr hidden-until=73a.type>
           <td class=label>Starting Quantity:
-          <td class=input><input type=text name=74b.onhand class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=74b.onhand class=cardinal-number tabindex=70 required-if=74a.type else-disallowed>
           <td class=label>Qty Distributed:
-          <td class=input><input type=text name=74c.distributed class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=74c.distributed class=cardinal-number tabindex=70 required-if=74a.type else-disallowed>
           <td class=label>Qty Available:
-          <td class=input><input type=text name=74d.available class=cardinal-number tabindex=70 required>
-        <tr data-conditional=74a.type>
+          <td class=input><input type=text name=74d.available class=cardinal-number tabindex=70 required-if=74a.type else-disallowed>
+        <tr hidden-until=74a.type>
           <td class="label border-right" rowspan=2>Item 6
           <td class=label>Type of Commodity:
           <td class=input colspan=5><input type=text name=75a.type tabindex=70>
-        <tr data-conditional=75a.type>
+        <tr hidden-until=74a.type>
           <td class=label>Starting Quantity:
-          <td class=input><input type=text name=75b.onhand class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=75b.onhand class=cardinal-number tabindex=70 required-if=75a.type else-disallowed>
           <td class=label>Qty Distributed:
-          <td class=input><input type=text name=75c.distributed class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=75c.distributed class=cardinal-number tabindex=70 required-if=75a.type else-disallowed>
           <td class=label>Qty Available:
-          <td class=input><input type=text name=75d.available class=cardinal-number tabindex=70 required>
-        <tr data-conditional=75a.type>
+          <td class=input><input type=text name=75d.available class=cardinal-number tabindex=70 required-if=75a.type else-disallowed>
+        <tr hidden-until=75a.type>
           <td class="label border-right" rowspan=2>Item 7
           <td class=label>Type of Commodity:
           <td class=input colspan=5><input type=text name=76a.type tabindex=70>
-        <tr data-conditional=76a.type>
+        <tr hidden-until=75a.type>
           <td class=label>Starting Quantity:
-          <td class=input><input type=text name=76b.onhand class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=76b.onhand class=cardinal-number tabindex=70 required-if=76a.type else-disallowed>
           <td class=label>Qty Distributed:
-          <td class=input><input type=text name=76c.distributed class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=76c.distributed class=cardinal-number tabindex=70 required-if=76a.type else-disallowed>
           <td class=label>Qty Available:
-          <td class=input><input type=text name=76d.available class=cardinal-number tabindex=70 required>
-        <tr data-conditional=76a.type>
+          <td class=input><input type=text name=76d.available class=cardinal-number tabindex=70 required-if=76a.type else-disallowed>
+        <tr hidden-until=76a.type>
           <td class="label border-right" rowspan=2>Item 8
           <td class=label>Type of Commodity:
           <td class=input colspan=5><input type=text name=77a.type tabindex=70>
-        <tr data-conditional=77a.type>
+        <tr hidden-until=76a.type>
           <td class=label>Starting Quantity:
-          <td class=input><input type=text name=77b.onhand class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=77b.onhand class=cardinal-number tabindex=70 required-if=77a.type else-disallowed>
           <td class=label>Qty Distributed:
-          <td class=input><input type=text name=77c.distributed class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=77c.distributed class=cardinal-number tabindex=70 required-if=77a.type else-disallowed>
           <td class=label>Qty Available:
-          <td class=input><input type=text name=77d.available class=cardinal-number tabindex=70 required>
+          <td class=input><input type=text name=77d.available class=cardinal-number tabindex=70 required-if=77a.type else-disallowed>
       </table>
       <%#include%>resources/html/scco-footer.html<%/include%>
     </form>

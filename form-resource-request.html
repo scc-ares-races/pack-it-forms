@@ -68,7 +68,7 @@
                     </table>
                 </table>
             </table>
-        <tr data-conditional=23n.name>
+        <tr hidden-until=23n.name>
           <td class="label border-right">Item 2
           <td class="input nest">
             <table>
@@ -77,23 +77,23 @@
                 <td class="input nest">
                   <table><tr>
                     <td class=input><input type=text name=24n.name tabindex=20>
-                    <td class=label data-conditional=24n.name>Quantity Requested:
-                    <td class=input data-conditional=24n.name><input type=text name=24q.quantity class=cardinal-number tabindex=20 required>
+                    <td class=label hidden-until=24n.name>Quantity Requested:
+                    <td class=input hidden-until=24n.name><input type=text name=24q.quantity class=cardinal-number tabindex=20 required-if=24n.name else-disallowed>
                   </table>
-              <tr data-conditional=24n.name>
+              <tr hidden-until=24n.name>
                 <td class=label>Description:
-                <td class=input><textarea name=24d.description tabindex=20></textarea>
-              <tr data-conditional=24n.name><td colspan=2 class=nest>
+                <td class=input><textarea name=24d.description tabindex=20 allowed-if=24n.name></textarea>
+              <tr hidden-until=24n.name><td colspan=2 class=nest>
                 <table><tr>
                   <td class=label>Includes Items for Demobilization?
                   <td class=input>
-                    <table class="boxgroup required-group"><tr>
-                      <td><input type=radio name=24i.demob value=Yes tabindex=20 required>Yes
-                      <td><input type=radio name=24i.demob value=No tabindex=20 required>No
+                    <table class="boxgroup required-group" required-if=24n.name else-disallowed><tr>
+                      <td><input type=radio name=24i.demob value=Yes tabindex=20>Yes
+                      <td><input type=radio name=24i.demob value=No tabindex=20>No
                     </table>
                 </table>
             </table>
-        <tr data-conditional=24n.name>
+        <tr hidden-until=24n.name>
           <td class="label border-right">Item 3
           <td class="input nest">
             <table>
@@ -102,23 +102,23 @@
                 <td class="input nest">
                   <table><tr>
                     <td class=input><input type=text name=25n.name tabindex=20>
-                    <td class=label data-conditional=25n.name>Quantity Requested:
-                    <td class=input data-conditional=25n.name><input type=text name=25q.quantity class=cardinal-number tabindex=20 required>
+                    <td class=label hidden-until=25n.name>Quantity Requested:
+                    <td class=input hidden-until=25n.name><input type=text name=25q.quantity class=cardinal-number tabindex=20 required-if=25n.name else-disallowed>
                   </table>
-              <tr data-conditional=25n.name>
+              <tr hidden-until=25n.name>
                 <td class=label>Description:
-                <td class=input><textarea name=25d.description tabindex=20></textarea>
-              <tr data-conditional=25n.name><td colspan=2 class=nest>
+                <td class=input><textarea name=25d.description tabindex=20 allowed-if=25n.name></textarea>
+              <tr hidden-until=25n.name><td colspan=2 class=nest>
                 <table><tr>
                   <td class=label>Includes Items for Demobilization?
                   <td class=input>
-                    <table class="boxgroup required-group"><tr>
-                      <td><input type=radio name=25i.demob value=Yes tabindex=20 required>Yes
-                      <td><input type=radio name=25i.demob value=No tabindex=20 required>No
+                    <table class="boxgroup required-group" required-if=25n.name else-disallowed><tr>
+                      <td><input type=radio name=25i.demob value=Yes tabindex=20>Yes
+                      <td><input type=radio name=25i.demob value=No tabindex=20>No
                     </table>
                 </table>
             </table>
-        <tr data-conditional=25n.name>
+        <tr hidden-until=25n.name>
           <td class="label border-right">Item 4
           <td class="input nest">
             <table>
@@ -127,23 +127,23 @@
                 <td class="input nest">
                   <table><tr>
                     <td class=input><input type=text name=26n.name tabindex=20>
-                    <td class=label data-conditional=26n.name>Quantity Requested:
-                    <td class=input data-conditional=26n.name><input type=text name=26q.quantity class=cardinal-number tabindex=20 required>
+                    <td class=label hidden-until=26n.name>Quantity Requested:
+                    <td class=input hidden-until=26n.name><input type=text name=26q.quantity class=cardinal-number tabindex=20 required-if=26n.name else-disallowed>
                   </table>
-              <tr data-conditional=26n.name>
+              <tr hidden-until=26n.name>
                 <td class=label>Description:
-                <td class=input><textarea name=26d.description tabindex=20></textarea>
-              <tr data-conditional=26n.name><td colspan=2 class=nest>
+                <td class=input><textarea name=26d.description tabindex=20 allowed-if=26n.name></textarea>
+              <tr hidden-until=26n.name><td colspan=2 class=nest>
                 <table><tr>
                   <td class=label>Includes Items for Demobilization?
                   <td class=input>
-                    <table class="boxgroup required-group"><tr>
-                      <td><input type=radio name=26i.demob value=Yes tabindex=20 required>Yes
-                      <td><input type=radio name=26i.demob value=No tabindex=20 required>No
+                    <table class="boxgroup required-group" required-if=26n.name else-disallowed><tr>
+                      <td><input type=radio name=26i.demob value=Yes tabindex=20>Yes
+                      <td><input type=radio name=26i.demob value=No tabindex=20>No
                     </table>
                 </table>
             </table>
-        <tr data-conditional=26n.name>
+        <tr hidden-until=26n.name>
           <td class="label border-right">Item 5
           <td class="input nest">
             <table>
@@ -152,23 +152,23 @@
                 <td class="input nest">
                   <table><tr>
                     <td class=input><input type=text name=27n.name tabindex=20>
-                    <td class=label data-conditional=27n.name>Quantity Requested:
-                    <td class=input data-conditional=27n.name><input type=text name=27q.quantity class=cardinal-number tabindex=20 required>
+                    <td class=label hidden-until=27n.name>Quantity Requested:
+                    <td class=input hidden-until=27n.name><input type=text name=27q.quantity class=cardinal-number tabindex=20 required-if=27n.name else-disallowed>
                   </table>
-              <tr data-conditional=27n.name>
+              <tr hidden-until=27n.name>
                 <td class=label>Description:
-                <td class=input><textarea name=27d.description tabindex=20></textarea>
-              <tr data-conditional=27n.name><td colspan=2 class=nest>
+                <td class=input><textarea name=27d.description tabindex=20 allowed-if=27n.name></textarea>
+              <tr hidden-until=27n.name><td colspan=2 class=nest>
                 <table><tr>
                   <td class=label>Includes Items for Demobilization?
                   <td class=input>
-                    <table class="boxgroup required-group"><tr>
-                      <td><input type=radio name=27i.demob value=Yes tabindex=20 required>Yes
-                      <td><input type=radio name=27i.demob value=No tabindex=20 required>No
+                    <table class="boxgroup required-group" required-if=27n.name else-disallowed><tr>
+                      <td><input type=radio name=27i.demob value=Yes tabindex=20>Yes
+                      <td><input type=radio name=27i.demob value=No tabindex=20>No
                     </table>
                 </table>
             </table>
-        <tr data-conditional=27n.name>
+        <tr hidden-until=27n.name>
           <td class="label border-right">Item 6
           <td class="input nest">
             <table>
@@ -177,19 +177,19 @@
                 <td class="input nest">
                   <table><tr>
                     <td class=input><input type=text name=28n.name tabindex=20>
-                    <td class=label data-conditional=28n.name>Quantity Requested:
-                    <td class=input data-conditional=28n.name><input type=text name=28q.quantity class=cardinal-number tabindex=20 required>
+                    <td class=label hidden-until=28n.name>Quantity Requested:
+                    <td class=input hidden-until=28n.name><input type=text name=28q.quantity class=cardinal-number tabindex=20 required-if=28n.name else-disallowed>
                   </table>
-              <tr data-conditional=28n.name>
+              <tr hidden-until=28n.name>
                 <td class=label>Description:
-                <td class=input><textarea name=28d.description tabindex=20></textarea>
-              <tr data-conditional=28n.name><td colspan=2 class=nest>
+                <td class=input><textarea name=28d.description tabindex=20 allowed-if=28n.name></textarea>
+              <tr hidden-until=28n.name><td colspan=2 class=nest>
                 <table><tr>
                   <td class=label>Includes Items for Demobilization?
                   <td class=input>
-                    <table class="boxgroup required-group"><tr>
-                      <td><input type=radio name=28i.demob value=Yes tabindex=20 required>Yes
-                      <td><input type=radio name=28i.demob value=No tabindex=20 required>No
+                    <table class="boxgroup required-group" required-if=28n.name else-disallowed><tr>
+                      <td><input type=radio name=28i.demob value=Yes tabindex=20>Yes
+                      <td><input type=radio name=28i.demob value=No tabindex=20>No
                     </table>
                 </table>
             </table>
@@ -239,9 +239,9 @@
               <td><input name=50.juris-active type=radio value=Yes tabindex=50 required>Yes
               <td><input name=50.juris-active type=radio value=No tabindex=50 required>No
             </table>
-        <tr data-conditional="50.juris-active=Yes">
+        <tr hidden-until="50.juris-active=Yes">
           <td class=label>Name of Jurisdiction's incident:
-          <td class=input><input type=text name=51.juris-incname tabindex=50 required>
+          <td class=input><input type=text name=51.juris-incname tabindex=50 required-if="50.juris-active=Yes" else-disallowed>
         <tr>
           <td class=label>Is this request related to a current COUNTY activation?
           <td class=input>
@@ -249,9 +249,9 @@
               <td><input name=52.county-active type=radio value=Yes tabindex=50 required>Yes
               <td><input name=52.county-active type=radio value=No tabindex=50 required>No
             </table>
-        <tr data-conditional="52.county-active=Yes">
+        <tr hidden-until="52.county-active=Yes">
           <td class=label>Name of County's incident:
-          <td class=input><input type=text name=51.county-incname tabindex=50 required>
+          <td class=input><input type=text name=51.county-incname tabindex=50 required-if="52.county-active=Yes" else-disallowed>
       </table>
       <table class=veoci>
         <caption>Comments

@@ -1662,13 +1662,13 @@ var required_groups = [];
 
 function onRequiredInputChange(evt) {
     const group = evt.target.closest('.required-group');
-    const checked = !!group.querySelector(':checked');
     if (group.querySelector(':checked')) {
         group.querySelectorAll('input[type=checkbox]:required').forEach(r => { r.required = false; });
         group.classList.remove('invalid');
     } else {
         let haveRequired = false, seenRFC = false;
         group.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach (r => {
+            if (r.disabled) return;
             if (r.classList.contains('required-for-complete')) seenRFC = true;
             r.required = !seenRFC || currentReportIsComplete;
             if (r.required) haveRequired = true;
@@ -1683,50 +1683,158 @@ function setupRequiredGroups(input) {
     required_groups.forEach(group => { onRequiredInputChange({target: group}) });
 }
 
-function setupConditionalElements() {
-    const the_form = document.getElementById('the-form');
-    document.querySelectorAll('[data-conditional]').forEach(elm => {
-        if (!elm.dataset.conditional) return;
-        const triggerSpec = elm.dataset.conditional.split('=', 2);
-        const triggerName = triggerSpec[0];
-        const triggerValue = triggerSpec[1];
-        if (!the_form[triggerName]) throw `data-conditional="${triggerSpec}": no such element`;
-        function onTriggerChange() {
-            const value = the_form[triggerName].value;
-            if ((triggerValue && value === triggerValue) || (!triggerValue && value)) {
-                elm.style.display = null;
-                elm.querySelectorAll('[was-required]').forEach(i => {
-                    i.required = true;
-                    i.removeAttribute('was-required')
-                })
-            } else {
-                elm.style.display = 'none';
-                const inputs = {};
-                elm.querySelectorAll('input[type=checkbox],input[type=radio]').forEach(i => {
-                    if (i.checked) {
-                        i.checked = false;
-                        i.dispatchEvent(new Event('change', { bubbles: true }));
-                    }
-                });
-                elm.querySelectorAll('input[type=text],select,textarea').forEach(i => {
-                    if (i.value) {
-                        i.value = '';
-                        i.dispatchEvent(new Event('change', { bubbles: true }));
-                    }
-                });
-                elm.querySelectorAll('[required]').forEach(i => {
-                    i.setAttribute('was-required', '');
-                    i.required = false;
-                })
-            }
-            check_the_form_validity();
+// A Conditional interprets the conditional in an element attribute
+// (hidden-until, required-if, allowed-if) and dispatches 'change' events when
+// the state of the conditional changes.
+class Conditional extends EventTarget {
+    static conditionals = {};
+    static getOrMake(elm, attr) {
+        const cstr = elm.getAttribute(attr);
+        if (!cstr) return null;
+        return this.conditionals[cstr] || new Conditional(elm, attr);
+    }
+    constructor(elm, attr) {
+        super();
+        const form = elm.closest('form');
+        if (!form) throw(`${attr} outside of a form`)
+        const cstr = elm.getAttribute(attr);
+        if (!cstr) return null;
+        const parts = cstr.split('=', 2);
+        this.field = form[parts[0]];
+        if (!this.field) throw(`${attr}="${cstr}": no such form element "${parts[0]}"`);
+        if (parts.length > 1)
+            this.test = () => (this.field.value == parts[1]);
+        else
+            this.test = () => (!!this.field.value);
+        this.was = this.test();
+        if (this.field instanceof RadioNodeList)
+            this.field.forEach(b => {b.addEventListener('change', this.onChange.bind(this))});
+        else if (this.field.type === 'checkbox' || this.field.type === 'radio')
+            this.field.addEventListener('change', this.onChange.bind(this));
+        else
+            this.field.addEventListener('input', this.onChange.bind(this));
+        this.constructor.conditionals[cstr] = this;
+    }
+    onChange() {
+        const is = this.test();
+        if (is != this.was) {
+            this.was = is
+            this.dispatchEvent(new CustomEvent('change', { detail: is }));
         }
-        document.getElementsByName(triggerName).forEach(tr => {
-            tr.addEventListener('change', onTriggerChange);
-            tr.addEventListener('input', onTriggerChange);
-        });
-        onTriggerChange();
+    }
+}
+
+function controlValue(control) {
+    if (control.type === 'checkbox' || control.type === 'radio') return control.checked ? 'checked' : '';
+    else return control.value;
+}
+function setControlValue(control, value) {
+    if (control.type === 'checkbox' || control.type === 'radio') control.checked = !!value;
+    else control.value = value;
+}
+function anyChildHasValue(elm) {
+    let found = false;
+    elm.querySelectorAll('input[type=checkbox],input[type=radio],input[type=text],select,textarea').forEach(control => {
+        if (controlValue(control)) found = true;
     });
+    return found;
+}
+
+function setupHiddenUntil() {
+    document.querySelectorAll('[hidden-until]').forEach(elm => {
+        const cond = Conditional.getOrMake(elm, 'hidden-until');
+        if (cond.test() || anyChildHasValue(elm)) return;
+        elm.setAttribute('hidden', '');
+        elm.querySelectorAll('[required]').forEach(control => {
+            control.setAttribute('hidden-save-required', control.getAttribute('required'));
+            control.removeAttribute('required');
+        })
+        cond.addEventListener('change', evt => {
+            elm.removeAttribute('hidden');
+            elm.querySelectorAll('[hidden-save-required]').forEach(control => {
+                control.setAttribute('required', control.getAttribute('hidden-save-required'));
+                control.removeAttribute('hidden-save-required');
+            });
+        }, { once: true });
+    });
+    applyConditionals();
+}
+
+function hasConditionals(elm) { return elm.hasAttribute('required-if') || elm.hasAttribute('allowed-if') }
+function inheritConditionals(elm) {
+    if (hasConditionals(elm)) return;
+    for (let p = elm.parentElement; p; p = p.parentElement) {
+        if (hasConditionals(p)) {
+            if (p.hasAttribute('required-if')) elm.setAttribute('required-if', p.getAttribute('required-if'));
+            if (p.hasAttribute('allowed-if')) elm.setAttribute('allowed-if', p.getAttribute('allowed-if'));
+            if (p.hasAttribute('else-disallowed')) elm.setAttribute('else-disallowed', p.getAttribute('else-disallowed'));
+            return;
+        }
+    }
+}
+
+function applyConditionals() {
+    document.querySelectorAll('input[type=checkbox],input[type=radio],input[type=text],select,textarea').forEach(elm => {
+        if (elm.closest('[hidden]')) return;
+        let state;
+        if (elm.hasAttribute('required-if')) {
+            if (elm.hasAttribute('allowed-if'))
+                throw('control cannot have both required-if and allowed-if attributes');
+            const cond = Conditional.getOrMake(elm, 'required-if');
+            if (cond.test())
+                state = 'required'
+            else if (elm.hasAttribute('else-disallowed'))
+                state = 'disallowed';
+            else
+                state = 'optional';
+        } else if (elm.hasAttribute('allowed-if')) {
+            const cond = Conditional.getOrMake(elm, 'allowed-if');
+            state = cond.test() ? 'optional' : 'disallowed';
+        }
+        switch (state) {
+        case 'required':
+            elm.required = true;
+            elm.disabled = false;
+            if (elm.hasAttribute('disallowed-value')) {
+                setControlValue(elm, elm.getAttribute('disallowed-value'));
+                elm.removeAttribute('disallowed-value');
+            }
+            break;
+        case 'optional':
+            elm.required = false;
+            elm.disabled = false;
+            if (elm.hasAttribute('disallowed-value')) {
+                setControlValue(elm, elm.getAttribute('disallowed-value'));
+                elm.removeAttribute('disallowed-value');
+            }
+            break;
+        case 'disallowed':
+            elm.required = false;
+            if (elm.type === 'checkbox' || elm.type === 'radio') {
+                if (elm.checked) elm.setAttribute('disallowed-value', 'checked');
+                elm.checked = false;
+            } else if (elm.value) {
+                elm.setAttribute('disallowed-value', elm.value);
+                elm.value = '';
+            }
+            elm.disabled = true;
+            break;
+        }
+    });
+    setupRequiredGroups();
+}
+
+function setupConditionalElements() {
+    setupHiddenUntil();
+    document.querySelectorAll('input[type=checkbox],input[type=radio]').forEach(elm => {
+        inheritConditionals(elm);
+        elm.addEventListener('change', applyConditionals);
+    });
+    document.querySelectorAll('input[type=text],select,textarea').forEach(elm => {
+        inheritConditionals(elm);
+        elm.addEventListener('input', applyConditionals);
+    });
+    applyConditionals();
 }
 
 function setup_inputs(next) {

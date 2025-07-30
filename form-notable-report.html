@@ -54,16 +54,16 @@
               <td><input id=escalate-yes name=23.escalate type=radio value=Yes tabindex=20 required>Yes
               <td><input name=23.escalate type=radio value=No tabindex=20 required>No
             </table>
-        <tr data-conditional="23.escalate=Yes">
+        <tr hidden-until="23.escalate=Yes">
           <td class=label>Is this event Incident Specific?
           <td class=input>
-            <table class="boxgroup required-group"><tr>
-              <td><input id=incident-specific-yes name=24.incident-specific type=radio value=Yes tabindex=20 required>Yes
-              <td><input name=24.incident-specific type=radio value=No tabindex=20 required>No
+            <table class="boxgroup required-group" required-if="23.escalate=Yes" else-disallowed><tr>
+              <td><input id=incident-specific-yes name=24.incident-specific type=radio value=Yes tabindex=20>Yes
+              <td><input name=24.incident-specific type=radio value=No tabindex=20>No
             </table>
-        <tr data-conditional="24.incident-specific=Yes">
+        <tr hidden-until="24.incident-specific=Yes">
           <td class=label>Name of Op Area Incident
-          <td class=input><input type=text id=incident-name name=25.incident-name tabindex=20 required>
+          <td class=input><input type=text id=incident-name name=25.incident-name tabindex=20 required-if="24.incident-specific=Yes" else-disallowed>
       </table>
       <table class=veoci>
         <caption>Event Details
@@ -139,8 +139,8 @@
                   <td><input id=expire-yes name=50.expire type=radio value=Yes tabindex=50 required>Yes
                   <td><input name=50.expire type=radio value=No tabindex=50 required>No
                 </table>
-              <td class=label data-conditional="50.expire=Yes">Date to Expire:
-              <td class=input data-conditional="50.expire=Yes"><input type=text id=expire-date name=51.expire-date class=date tabindex=50>
+              <td class=label hidden-until="50.expire=Yes">Date to Expire:
+              <td class=input hidden-until="50.expire=Yes"><input type=text id=expire-date name=51.expire-date class=date tabindex=50 allowed-if="50.expire=Yes">
             </table>
       </table>
       <%#include%>resources/html/scco-footer.html<%/include%>
