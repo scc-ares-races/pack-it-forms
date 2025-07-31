@@ -7,7 +7,7 @@
     <style>.annotation { font-size: 80%; font-weight: normal }</style>
     <script type=text/javascript src=resources/js/pack-it-forms.js></script>
     <script type=text/javascript src="resources/integration/integration.js"></script>
-    <meta name="pack-it-forms-pdf-URL" content="pdf/CPOD_Site_Information_v20250724.pdf">
+    <meta name="pack-it-forms-pdf-URL" content="pdf/CPOD_Site_Information_v20250730.pdf">
     <meta name="pack-it-forms-subject-suffix" content="_CPODSite_{{field:22.site-name}}">
     <title>CPOD Site Information Form</title>
   </head>
@@ -18,7 +18,7 @@
     <form id=the-form name=the-form>
       <%#run%>include('resources/html/scco-header.html', {
           "title": "CPOD Site Information Form",
-          "version": "PDF: 20250724<br/>PIF: {{version}}",
+          "version": "PDF: 20250730<br/>PIF: {{version}}",
           "handling": "ROUTINE",
           "to-ics-position": "CPOD Unit; Mass Care & Emerg. Asst. Branch; Operations",
           "to-location": "County EOC",
@@ -181,11 +181,11 @@
         <tr><td class=input colspan=2>
           <div class=label>Site Accessibility:</div>
           <div style="margin-left:36pt">
-            <input name=52a.access-wheelchair type=checkbox tabindex=56>Sidewalks leading to the site have wheelchair access
+            <input name=52a.access-wheelchair type=checkbox tabindex=56>There are sidewalks leading to the site that have wheelchair access
             <br>
-            <input name=52b.access-uneven type=checkbox tabindex=56>Uneven surfaces leading up to the site
+            <input name=52b.access-uneven type=checkbox tabindex=56>There are uneven surfaces leading up to the site
             <br>
-            <input name=52c.access-ramp type=checkbox tabindex=56>Is there a ramp from the staff parking location leading up to the POD location?
+            <input name=52c.access-ramp type=checkbox tabindex=56>There is a ramp from the staff parking location leading up to the POD location
           </div>
       </table>
       <table class=veoci>
