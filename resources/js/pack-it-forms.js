@@ -1838,6 +1838,7 @@ function setupConditionalElements() {
 }
 
 function setup_inputs(next) {
+    setupConditionalElements();
     if (!envelope.readOnly) {
         required_groups = Array.from(document.querySelectorAll('.required-group'));
         required_groups.forEach(g => { g.addEventListener('change', onRequiredInputChange) });
@@ -1878,7 +1879,6 @@ function setup_inputs(next) {
                 el.addEventListener("change", formChanged);
             }
         });
-        setupConditionalElements();
         setupRequiredGroups();
         the_form.addEventListener("input", formChanged);
         write_message_to_form_data();
