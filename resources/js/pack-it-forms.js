@@ -1662,7 +1662,7 @@ var required_groups = [];
 
 function onRequiredInputChange(evt) {
     const group = evt.target.closest('.required-group');
-    if (group.querySelector(':checked')) {
+    if (group.querySelector(':checked') || group.closest('[hidden]')) {
         group.querySelectorAll('input[type=checkbox]:required').forEach(r => { r.required = false; });
         group.classList.remove('invalid');
     } else {
@@ -1878,8 +1878,8 @@ function setup_inputs(next) {
                 el.addEventListener("change", formChanged);
             }
         });
-        setupRequiredGroups();
         setupConditionalElements();
+        setupRequiredGroups();
         the_form.addEventListener("input", formChanged);
         write_message_to_form_data();
     }
