@@ -1750,12 +1750,13 @@ function setupHiddenUntil() {
             control.removeAttribute('required');
         })
         cond.addEventListener('change', evt => {
+            if (!cond.test()) return;
             elm.removeAttribute('hidden');
             elm.querySelectorAll('[hidden-save-required]').forEach(control => {
                 control.setAttribute('required', control.getAttribute('hidden-save-required'));
                 control.removeAttribute('hidden-save-required');
             });
-        }, { once: true });
+        });
     });
     applyConditionals();
 }
@@ -2395,13 +2396,14 @@ var integration = {
                 var oldValue = element.value;
                 element.value = oldValue + ".";
                 element.value = oldValue;
-            } else if (element.type == "checkbox" ||
-                       element.tagName.toLowerCase() == "select") {
-                // Trigger any side-effects:
+            } else {
+                if (element.type !== 'checkbox' && element.type !== 'radio')
+                    fireEvent(element, 'input');
                 fireEvent(element, "change");
             }
         });
         set_form_default_values();
+        setupHiddenUntil();
         next();
     },
 
