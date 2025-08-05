@@ -43,14 +43,13 @@
           <td class=label>Item:
           <td class=input>
             <table class="boxgroup required-group"><tr>
-              <td><input type=radio name=23.item value=Building tabindex=20 required>Building
-              <td><input type=radio name=23.item value=Road tabindex=20 required>Road
-              <td><input type=radio name=23.item value=Other tabindex=20 required>Other
+              <td><input type=checkbox name=23a.building tabindex=20 required>Building
+              <td><input type=checkbox name=23b.road tabindex=20 required>Road
             </table>
-        <tr>
+        <tr hidden-until=23a.building>
           <td class=label>Building Type:
           <td class=input>
-            <table class=boxgroup>
+            <table class="boxgroup required-group" required-if=23a.building else-disallowed>
               <tr>
                 <td><input type=radio name=24.type value=Single tabindex=20>Single Family Home
                 <td><input type=radio name=24.type value=Mobile tabindex=20>Mobile Home or Trailer
@@ -61,9 +60,6 @@
                 <td><input type=radio name=24.type value=Apartment tabindex=20>Apartment
                 <td><input type=radio name=24.type value=Other tabindex=20>Other <span class=annotation>(describe below)</span>
             </table>
-        <tr>
-          <td class=label>Number of Stories:
-          <td class=input><input type=text name=25.stories class=cardinal-number tabindex=20>
         <tr>
           <td class=label>Damage Categorization:
           <td class=input>

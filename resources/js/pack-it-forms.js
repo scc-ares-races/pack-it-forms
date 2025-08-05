@@ -1702,7 +1702,9 @@ class Conditional extends EventTarget {
         const parts = cstr.split('=', 2);
         this.field = form[parts[0]];
         if (!this.field) throw(`${attr}="${cstr}": no such form element "${parts[0]}"`);
-        if (parts.length > 1)
+        if (this.field.type === 'checkbox')
+            this.test = () => (this.field.checked);
+        else if (parts.length > 1)
             this.test = () => (this.field.value == parts[1]);
         else
             this.test = () => (!!this.field.value);
