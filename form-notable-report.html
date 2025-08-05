@@ -140,7 +140,7 @@
                   <td><input name=50.expire type=radio value=No tabindex=50 required>No
                 </table>
               <td class=label hidden-until="50.expire=Yes">Date to Expire:
-              <td class=input hidden-until="50.expire=Yes"><input type=text id=expire-date name=51.expire-date class=date tabindex=50 allowed-if="50.expire=Yes">
+              <td class=input hidden-until="50.expire=Yes"><input type=text id=expire-date name=51.expire-date class=date tabindex=50 required-if="50.expire=Yes" else-disallowed>
             </table>
       </table>
       <%#include%>resources/html/scco-footer.html<%/include%>
