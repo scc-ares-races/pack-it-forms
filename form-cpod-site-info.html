@@ -194,12 +194,12 @@
           <td class=label>Date Opened:
           <td class=input><input type=text name=60d.date-opened class=date tabindex=60>
           <td class=label>Time Opened:
-          <td class=input><input type=text name=60t.time-opened class=time tabindex=60>
+          <td class=input><input type=text name=60t.time-opened class=time tabindex=60 required-if=60d.date-opened else-disallowed>
         <tr>
           <td class=label>Date Closed:
           <td class=input><input type=text name=61d.date-closed class=date tabindex=60>
           <td class=label>Time Closed:
-          <td class=input><input type=text name=61t.time-closed class=time tabindex=60>
+          <td class=input><input type=text name=61t.time-closed class=time tabindex=60 required-if=61d.date-closed else-disallowed>
       </table>
       <table class=veoci>
         <caption>Commodities

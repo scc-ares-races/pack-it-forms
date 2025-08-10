@@ -58,12 +58,12 @@
           <td class=label>Closure Start Date:
           <td class=input><input type=text name=30d.start-date class=date tabindex=30>
           <td class=label>Closure Start Time:
-          <td class=input><input type=text name=30t.start-time class=time tabindex=30>
+          <td class=input><input type=text name=30t.start-time class=time tabindex=30 required-if=30d.start-date else-disallowed>
         <tr>
           <td class=label>Closure End Date:
           <td class=input><input type=text name=31d.end-date class=date tabindex=30>
           <td class=label>Closure End Time:
-          <td class=input><input type=text name=31t.end-time class=time tabindex=30>
+          <td class=input><input type=text name=31t.end-time class=time tabindex=30 required-if=31d.end-date else-disallowed>
       </table>
       <%#include%>resources/html/scco-footer.html<%/include%>
     </form>

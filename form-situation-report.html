@@ -103,7 +103,7 @@
             <table><tr>
               <td class=input><input type=text name=51d.office-open-date class=date tabindex=50>
               <td class=label>Time:
-              <td class=input><input type=text name=51t.office-open-time class=time tabindex=50>
+              <td class=input><input type=text name=51t.office-open-time class=time tabindex=50 required-if=51d.office-open-date else-disallowed>
             </table>
         <tr>
           <td class=label>Expected to Close Date:
@@ -111,7 +111,7 @@
             <table><tr>
               <td class=input><input type=text name=52d.office-close-date class=date tabindex=50>
               <td class=label>Time:
-              <td class=input><input type=text name=52t.office-close-time class=time tabindex=50>
+              <td class=input><input type=text name=52t.office-close-time class=time tabindex=50 required-if=52d.office-close-date else-disallowed>
             </table>
       </table>
       <table class=veoci>
