@@ -77,7 +77,14 @@
             <table><tr>
               <td class=input><input type=text name=25a.address tabindex=20 required>
               <td class=label>City:
-              <td class=input><input type=text name=25c.city tabindex=20 required>
+              <td class=input>
+                <%#run%>include('resources/html/combobox.html', {
+                    name: "25c.city",
+                    tabindex: "20",
+                    attributes: 'placeholder="Select one..." required',
+                    options: 'Campbell; Cupertino; Gilroy; Los Altos; Los Altos Hills; Los Gatos; Milpitas; Monte Sereno; Morgan Hill; Mountain View; Palo Alto; San Jose; Santa Clara; Saratoga; Sunnyvale',
+                  })
+                <%/run%>
               <td class=label>ZIP code:</td>
               <td class=input><input type=text name=25z.zip-code tabindex=20 style="max-width:5em" pattern="\d{5}(?:-\d{4})?">
             </table>
