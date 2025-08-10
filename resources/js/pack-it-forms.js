@@ -1624,6 +1624,7 @@ function setup_input_from_classes(input) {
     if (input.type == "textarea") {
         check_not_blank(input);
     } else if (input.type == "text") {
+        if (pattern == "\\s*\\S.*") pattern = "";
         if (input.required) {
             if (!pattern) {
                 pattern = "\\s*\\S.*"; // not all white space
@@ -1823,6 +1824,7 @@ function applyConditionals() {
             elm.disabled = true;
             break;
         }
+        setup_input_from_classes(elm);
     });
     setupRequiredGroups();
 }
