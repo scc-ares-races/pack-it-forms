@@ -20,7 +20,6 @@ Function ChooseAddonFiles
   File built\pack-it-forms\form-shelter.html
   File built\pack-it-forms\form-situation-report.html
   File built\pack-it-forms\form-windshield-survey.html
-  File pack-it-forms\new-forms.txt
 
   SetOutPath "$INSTDIR\pdf"
   File pack-it-forms\pdf\Allied_Health_Facility_Status_*.pdf
