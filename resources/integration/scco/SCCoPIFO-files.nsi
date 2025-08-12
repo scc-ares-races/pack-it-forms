@@ -24,7 +24,7 @@ Function ChooseAddonFiles
   SetOutPath "$INSTDIR\pdf"
   File pack-it-forms\pdf\Allied_Health_Facility_Status_*.pdf
   File pack-it-forms\pdf\CPOD_Commodities_*.pdf
-  File pack-it-forms\pdf\CPOD_Site_Info_*.pdf
+  File pack-it-forms\pdf\CPOD_Site_Information_*.pdf
   File pack-it-forms\pdf\Damage_Assessment_*.pdf
   File pack-it-forms\pdf\ICS-213_*.pdf
   File pack-it-forms\pdf\Notable_Report_*.pdf
