@@ -1602,6 +1602,7 @@ function setup_input_from_classes(input) {
         "phone-number": {pattern: "[a-zA-Z ]*([+][0-9]+ )?[0-9][0-9 \\-]*([xX][0-9]+)?",
                          placeholder: "000-000-0000 x00"},
         "cardinal-number": {pattern: "[0-9]*"},
+        "nonzero-cardinal-number": {pattern: "[1-9][0-9]*"},
         "real-number":      {pattern: "[\\-+]?[0-9]*\\.[0-9]+|[\\-+]?[0-9]+"},
         "frequency": {pattern: "[0-9]+(\.[0-9]+)?"},
         "frequency-offset": {pattern: "[\\-+]?[0-9]*\\.[0-9]+|[\\-+]?[0-9]+|[\\-+]"}
